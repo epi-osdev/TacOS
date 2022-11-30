@@ -7,7 +7,8 @@ ISO				= ./iso
 ENTRY			= $(SRC)/entry
 UTILS			= $(SRC)/utils
 BOOT			= $(SRC)/boot_sector
-INTERRUPTS			= $(SRC)/interrupts
+INTERRUPTS		= $(SRC)/interrupts
+DRIVERS			= $(SRC)/drivers
 
 # Kernel needed file(s)
 KERNEL_BIN		= $(BIN)/kernel.bin
@@ -29,17 +30,25 @@ INCLUDES		= -I $(SRC) -I $(UTILS)
 
 # Flags
 ASM_FLAGS		= -f elf
-CFLAGS			= -g -ffreestanding $(INCLUDES)
+CFLAGS			= -g -ffreestanding $(INCLUDES) -W -Wall -Wextra -Werror
 LDFLAGS			= -Ttext 0x1000 --oformat binary
 
 # Sources
-ASM_SRC			= $(ENTRY)/entry_point.asm
+ASM_SRC			= $(ENTRY)/entry_point.asm \
+				$(DRIVERS)/idt/interrupts.asm
 C_SRC			= $(ENTRY)/kernel_entry.c \
 				  $(UTILS)/VGA/clear.c \
 				  $(UTILS)/VGA/print.c \
 				  $(UTILS)/string/revstr.c \
 				  $(UTILS)/string/itoa.c \
-				  $(UTILS)/string/strlen.c
+				  $(UTILS)/string/strlen.c \
+				  $(DRIVERS)/idt/idt.c \
+				  $(DRIVERS)/idt/init.c \
+				  $(DRIVERS)/idt/handler.c \
+				  $(DRIVERS)/pic/remap.c \
+				  $(DRIVERS)/pic/io.c \
+				  $(DRIVERS)/keyboard/init.c \
+				  $(DRIVERS)/keyboard/handler.c
 
 # Objects
 C_OBJ			= $(C_SRC:.c=.o)
