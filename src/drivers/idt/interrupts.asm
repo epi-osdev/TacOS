@@ -2,8 +2,8 @@
 [extern isr_handler]
 [extern irq_handler]
 
-
-isr_common_stub:
+%macro STUB 1
+%1_common_stub:
     pusha
 
     xor eax, eax
@@ -17,7 +17,7 @@ isr_common_stub:
     mov gs, ax
     
     push esp ; push esp --> C function parameter
-    call isr_handler
+    call %1_handler
     add esp, 4
 
     pop eax
@@ -30,34 +30,10 @@ isr_common_stub:
     add esp, 8              ; Cleans up the pushed error code and pushed ISR number
     sti
     iret
+%endmacro
 
-irq_common_stub:
-    pusha
-
-    xor eax, eax
-    mov ax, ds
-    push eax
-
-    mov ax, 0x10
-    mov ds, ax
-    mov es, ax
-    mov fs, ax
-    mov gs, ax
-
-    push esp
-    call irq_handler
-    add esp, 4
-
-    pop eax
-    mov ds, ax
-    mov es, ax
-    mov fs, ax
-    mov gs, ax
-
-    popa
-    add esp, 8
-    sti
-    iret
+STUB isr
+STUB irq
 
 %macro ISR 1
     global isr%1
