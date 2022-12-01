@@ -58,4 +58,10 @@ typedef enum {
     IDT_FLAG_PRESENT            = 0x80
 } IDT_FLAGS;
 
+/**
+ * @brief This is a typedef to a function pointer.
+ * It will launch the function when an interrupt is called.
+*/
+typedef void (*handler_t)(registers_t *regs);
+
 #endif

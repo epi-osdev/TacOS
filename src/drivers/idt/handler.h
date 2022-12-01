@@ -3,8 +3,6 @@
 
     #include "drivers/idt/datas.h"
 
-typedef void (*handler_t)(registers_t *regs);
-
 /**
  * @brief ISR handler, called by all the ISR, it will be used
  * by the call of the isr stub

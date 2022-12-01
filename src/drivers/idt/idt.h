@@ -36,11 +36,4 @@ void disable_entry(uint8_t index);
 */
 void enable_entry(uint8_t index);
 
-/**
- * @brief Set the callback of the IDT entry.
- * @param index The index of the IDT entry.
- * @param call The address of the function to call when the interrupt is triggered.
-*/
-void set_callback(uint8_t index, void *call);
-
 #endif
