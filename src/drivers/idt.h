@@ -12,5 +12,6 @@
     #include "idt/init.h"
     #include "idt/idt.h"
     #include "idt/datas.h"
+    #include "idt/handler.h"
 
 #endif
