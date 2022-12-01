@@ -4,3 +4,4 @@ iso/*
 !iso/.gitkeep
 *.o
 *.bin
+.vscode
