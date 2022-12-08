@@ -19,11 +19,11 @@
     #define VGA_WHITE 0xF
 
 /**
- * @brief Create the address to set the background and frontground to the string
+ * @brief Create the value to set the background and frontground to the string
  * @param BG: Background color of the string
  * @param FG frontground color of the string
- * @param ADR address of the color
- * @fonction APPLY_MASK apply mask on the address its allows to set the 4 hard byte to 0
+ * @param ADR value of the color
+ * @fonction APPLY_MASK apply mask on the value its allows to set the 4 hard byte to 0
  */
 
     #define APPLY_MASK(ADR) __APPLY_MASK__(ADR)
