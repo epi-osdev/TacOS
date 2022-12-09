@@ -26,7 +26,6 @@
  * @fonction APPLY_MASK apply mask on the value its allows to set the 4 hard byte to 0
  */
 
-    #define APPLY_MASK(ADR) __APPLY_MASK__(ADR)
     #define __APPLY_MASK__(ADR) ADR & 0b00001111
     #define VGA_MAKE_COLOR(BG, FG) (((__APPLY_MASK__(BG)) << 4) | (__APPLY_MASK__(FG)))
 
