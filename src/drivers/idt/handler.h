@@ -18,13 +18,6 @@ extern void isr_handler(registers_t *regs);
 extern void irq_handler(registers_t *regs);
 
 /**
- * @brief register an handler for an interrupt
- * @param n the interrupt number
- * @param handler the handler
-*/
-void register_handler(uint8_t n, handler_t handler);
-
-/**
  * @brief set the callback of an interrupt
  * @param index the interrupt number
  * @param call the callback
