@@ -30,7 +30,7 @@ INCLUDES		= -I $(SRC) -I $(UTILS)
 
 # Flags
 ASM_FLAGS		= -f elf
-CFLAGS			= -g -ffreestanding $(INCLUDES) -W -Wall -Wextra -Werror
+CFLAGS			= -g3 -ffreestanding $(INCLUDES) -W -Wall -Wextra -Werror
 LDFLAGS			= -Ttext 0x1000 --oformat binary
 
 # Sources
@@ -48,7 +48,9 @@ C_SRC			= $(ENTRY)/kernel_entry.c \
 				  $(DRIVERS)/pic/remap.c \
 				  $(DRIVERS)/pic/io.c \
 				  $(DRIVERS)/keyboard/init.c \
-				  $(DRIVERS)/keyboard/handler.c
+				  $(DRIVERS)/keyboard/handler.c \
+				  $(DRIVERS)/mouse/init.c \
+				  $(DRIVERS)/mouse/handler.c
 
 # Objects
 C_OBJ			= $(C_SRC:.c=.o)

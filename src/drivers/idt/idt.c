@@ -40,4 +40,3 @@ void enable_entry(uint8_t index)
 {
     idt[index].flags |= IDT_FLAG_PRESENT;
 }
-
