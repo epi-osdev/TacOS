@@ -23,11 +23,6 @@ void irq_handler(registers_t *regs)
     }
 }
 
-void register_handler(uint8_t n, handler_t handler)
-{
-    handlers[n] = handler;
-}
-
 void set_callback(uint8_t index, handler_t call)
 {
     handlers[index] = call;
