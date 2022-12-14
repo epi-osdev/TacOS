@@ -10,5 +10,7 @@
     #include "string/itoa.h"
     #include "string/revstr.h"
     #include "string/strlen.h"
+    #include "string/islower.h"
+    #include "string/uppercase.h"
 
 #endif
