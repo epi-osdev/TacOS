@@ -9,6 +9,7 @@
 
     #include "VGA/clear.h"
     #include "VGA/print.h"
+    #include "VGA/config.h"
     #include "VGA/VGA_color_macros.h"
 
 #endif

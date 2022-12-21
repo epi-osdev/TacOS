@@ -1,4 +1,4 @@
-#include "VGA.h"
+#include "config.h"
 #include "print.h"
 #include "string.h"
 #include <stdarg.h>

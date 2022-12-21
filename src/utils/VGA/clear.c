@@ -1,5 +1,5 @@
 #include "clear.h"
-#include "VGA.h"
+#include "config.h"
 
 void vga_clear_screen()
 {
