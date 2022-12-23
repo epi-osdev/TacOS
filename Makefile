@@ -48,7 +48,11 @@ C_SRC			= $(ENTRY)/kernel_entry.c \
 				  $(DRIVERS)/pic/remap.c \
 				  $(DRIVERS)/pic/io.c \
 				  $(DRIVERS)/keyboard/init.c \
-				  $(DRIVERS)/keyboard/handler.c
+				  $(DRIVERS)/keyboard/handler.c \
+				  $(DRIVERS)/mouse/handler.c \
+				  $(DRIVERS)/mouse/init.c \
+				  $(DRIVERS)/mouse/cursor.c \
+				  $(DRIVERS)/mouse/mouse_timer.c \
 
 # Objects
 C_OBJ			= $(C_SRC:.c=.o)
