@@ -133,3 +133,71 @@ void set_scaling(uint8_t scaling)
     mouse_read();
 }
 ```
+
+# HANDLING <a name="handling"></a>
+
+The mouse handler is called when the mouse interrupt is triggered. When the 
+interrupt was triggered the mouse send a packet to the computer. The packet 
+is compose of three bytes. The first byte contain many information :
+
+- bit 0 : left button
+- bit 1 : right button
+- bit 2 : middle button
+- bit 3 : allways 1 (it permit to know if the mouse is sending a packet)
+- bit 4 : x sign
+- bit 5 : y sign
+- bit 6 : x overflow
+- bit 7 : y overflow
+
+The second byte contain the x movement of the mouse. It goes from -256 to 255
+and the third byte contain the y movement of the mouse.
+
+Now we have all this information how can get it, assamble it and use it ? 
+
+First of all we need to disable the keyboard interrupt because the two of 
+them are sharing the same data port on the pic. 
+```c
+    disable_entry(33);
+```
+
+Then we need to read the three bytes of the packet. Something that i don't 
+say it's, the mouse send 3 byte but if we want to use the scroll wheel later 
+the mouse will send 4 byte. so we need to create an array of 4 byte to be sure.
+
+### packet creation 
+
+For the packet creation we need to get the byte in diffent position is the 
+array we use an switch case in while to do that the switch case switch on an 
+number who is incremented each time we get a byte. 
+```c
+    while ( mouse_data_cycle < 4 && packet_ready == 0) {
+        if (packet_ready == 1)
+            break;
+        switch (mouse_data_cycle) {
+            case 0 : {
+                uint8_t data = port_byte_in(0x60);
+                if ((data & 0b00001000) == 0)
+                break;
+                mouse_byte[0] = data;
+                mouse_data_cycle++;
+                break;
+            }
+            case 1 :
+                mouse_byte[1] = port_byte_in(0x60);
+                mouse_data_cycle++;
+                break;
+            case 2 :
+                mouse_byte[2] = port_byte_in(0x60);
+                mouse_data_cycle = 0;
+                packet_ready = 1;
+                break;
+            }
+        }
+```
+As you can see we verify is the byte number 3 is set to 1. If it's we cut 
+the byte aquiring and we start again.
+
+In this way if we want the 4'th byte we juste need to add A case. 
+
+# CURSOR <a name="cursor"></a>
+
