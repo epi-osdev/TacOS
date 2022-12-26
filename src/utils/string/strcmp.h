@@ -9,6 +9,8 @@
 * @param s2: the string that compares
 * @return 0: If s1 and s2 are equal
 * @return s1 - s2: If s1 and s2 are different
+* @return -1: If s1 is NULL
+* @return 1: If s2 is NULL
 */
 
 int strcmp(char * s1, char * s2);
