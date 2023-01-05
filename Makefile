@@ -52,6 +52,7 @@ C_SRC			= $(ENTRY)/kernel_entry.c \
 				  $(DRIVERS)/keyboard/init.c \
 				  $(DRIVERS)/keyboard/handler.c \
 				  $(DRIVERS)/vesa/init.c \
+				  $(DRIVERS)/gdt/gdt.c
 
 # Objects
 C_OBJ			= $(C_SRC:.c=.o)
