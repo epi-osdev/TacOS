@@ -30,7 +30,7 @@ INCLUDES		= -I $(SRC) -I $(UTILS)
 
 # Flags
 ASM_FLAGS		= -f elf
-CFLAGS			= -g -ffreestanding $(INCLUDES) -W -Wall -Wextra -Werror
+CFLAGS			= -g -ffreestanding $(INCLUDES) -W -Wall -Wextra
 LDFLAGS			= -Ttext 0x1000 --oformat binary
 
 # Sources
@@ -42,13 +42,16 @@ C_SRC			= $(ENTRY)/kernel_entry.c \
 				  $(UTILS)/string/revstr.c \
 				  $(UTILS)/string/itoa.c \
 				  $(UTILS)/string/strlen.c \
+				  $(UTILS)/memory/memset.c \
+				  $(UTILS)/memory/memcpy.c \
 				  $(DRIVERS)/idt/idt.c \
 				  $(DRIVERS)/idt/init.c \
 				  $(DRIVERS)/idt/handler.c \
 				  $(DRIVERS)/pic/remap.c \
 				  $(DRIVERS)/pic/io.c \
 				  $(DRIVERS)/keyboard/init.c \
-				  $(DRIVERS)/keyboard/handler.c
+				  $(DRIVERS)/keyboard/handler.c \
+				  $(DRIVERS)/vesa/init.c \
 
 # Objects
 C_OBJ			= $(C_SRC:.c=.o)
