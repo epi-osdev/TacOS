@@ -70,6 +70,10 @@ build: boot_bin kernel_bin
 run:
 	qemu-system-x86_64 -d int -no-reboot $(OS_BIN)
 
+run_bochs:
+	$(RM) $(OS_BIN).lock
+	bochs -q -f bochsrc
+
 build_and_run: build run
 
 boot_bin:
