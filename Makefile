@@ -42,6 +42,8 @@ C_SRC			= $(ENTRY)/kernel_entry.c \
 				  $(UTILS)/string/revstr.c \
 				  $(UTILS)/string/itoa.c \
 				  $(UTILS)/string/strlen.c \
+				  $(UTILS)/memory/memset.c \
+				  $(UTILS)/memory/memcpy.c \
 				  $(DRIVERS)/idt/idt.c \
 				  $(DRIVERS)/idt/init.c \
 				  $(DRIVERS)/idt/handler.c \
