@@ -8,7 +8,7 @@ void init()
     vga_clear_screen();
     idt_init();
     init_keyboard();
-    // init_vesa();
+    init_vesa();
 }
 
 void kernel_main()

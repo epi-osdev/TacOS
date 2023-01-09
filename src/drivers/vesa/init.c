@@ -3,10 +3,10 @@
 
 static void bios32_init()
 {
-    
+
 }
 
 void init_vesa()
 {
-    
+    bios32_init();
 }

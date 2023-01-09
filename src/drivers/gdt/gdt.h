@@ -5,6 +5,11 @@
 
     #define NO_GDT_DESCRIPTORS      8
 
+typedef struct base_s {
+    uint16_t low;
+    uint8_t middle, high;
+} base_t;
+
 typedef struct gdt_entry_s {
     uint16_t segment_limit;              // segment limit first 0-15 bits
     uint16_t base_low;                   // base first 0-15 bits
@@ -19,5 +24,6 @@ typedef struct gdt_descriptor_s {
     uint32_t base_address;               // base address of the first GDT segment
 } __attribute__((packed)) gdt_descriptor_t;
 
+void gdt_set_entry(uint8_t index, base_t base, uint32_t limit, uint8_t access, uint8_t gran);
 
 #endif
