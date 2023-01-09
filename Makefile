@@ -42,8 +42,6 @@ C_SRC			= $(ENTRY)/kernel_entry.c \
 				  $(UTILS)/string/revstr.c \
 				  $(UTILS)/string/itoa.c \
 				  $(UTILS)/string/strlen.c \
-				  $(UTILS)/memory/memset.c \
-				  $(UTILS)/memory/memcpy.c \
 				  $(DRIVERS)/idt/idt.c \
 				  $(DRIVERS)/idt/init.c \
 				  $(DRIVERS)/idt/handler.c \
@@ -52,7 +50,6 @@ C_SRC			= $(ENTRY)/kernel_entry.c \
 				  $(DRIVERS)/keyboard/init.c \
 				  $(DRIVERS)/keyboard/handler.c \
 				  $(DRIVERS)/vesa/init.c \
-				  $(DRIVERS)/gdt/gdt.c
 
 # Objects
 C_OBJ			= $(C_SRC:.c=.o)
@@ -71,7 +68,7 @@ build: boot_bin kernel_bin
 
 # Compile and launch QEMU
 run:
-	qemu-system-x86_64 -d int -no-reboot -enable-kvm $(OS_BIN)
+	qemu-system-x86_64 -d int -no-reboot $(OS_BIN)
 
 build_and_run: build run
 
