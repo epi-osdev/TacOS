@@ -13,7 +13,7 @@ DRIVERS			= $(SRC)/drivers
 # Kernel needed file(s)
 KERNEL_BIN		= $(BIN)/kernel.bin
 KERNEL_BUILD	= $(BIN)/kernelfull.o
-OS_BIN			= $(ISO)/epi-os.iso
+OS_BIN			= $(ISO)/epi-os.img
 
 # Compilation tools (compiler, linker, etc..)
 NASM			= nasm
@@ -66,11 +66,12 @@ all: build
 build: boot_bin kernel_bin
 	dd if=$(BOOT_BIN) 					>> $(OS_BIN)
 	dd if=$(KERNEL_BIN) 				>> $(OS_BIN)
-	dd if=/dev/zero bs=1048576 count=16 >> $(OS_BIN)
+	# bs = 16 Mo - size(BOOT_BIN) - size(KERNEL_BIN)
+	dd if=/dev/zero bs=16760302 count=1  >> $(OS_BIN)
 
 # Compile and launch QEMU
 run:
-	qemu-system-x86_64 -d int -no-reboot $(OS_BIN)
+	qemu-system-x86_64 -d int -no-reboot -enable-kvm $(OS_BIN)
 
 build_and_run: build run
 
