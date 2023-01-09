@@ -29,9 +29,9 @@ BOOT_FLAGS		= -f bin
 INCLUDES		= -I $(SRC) -I $(UTILS)
 
 # Flags
-ASM_FLAGS		= -f elf
+ASM_FLAGS		= -f elf32
 CFLAGS			= -g -ffreestanding $(INCLUDES) -W -Wall -Wextra
-LDFLAGS			= -Ttext 0x1000 --oformat binary
+LDFLAGS			= -Ttext 0x7e00 --oformat binary
 
 # Sources
 ASM_SRC			= $(ENTRY)/entry_point.asm \

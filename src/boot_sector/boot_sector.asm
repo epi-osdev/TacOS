@@ -21,7 +21,7 @@ run_16:
 
 [bits 16]
 load_kernel:
-    mov bx, KERNEL_OFFSET
+    mov ebx, KERNEL_OFFSET
     mov dh, 31
     mov dl, [BOOT_DRIVE]
     call disk_load
@@ -33,7 +33,7 @@ entry_point:
     jmp $
 
 BOOT_DRIVE db 0
-KERNEL_OFFSET equ 0x1000
+KERNEL_OFFSET equ 0x7e00
 
 times 510 - ($-$$) db 0
 dw 0xaa55
