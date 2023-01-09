@@ -64,10 +64,10 @@ KERNEL_OBJS		= $(ASM_OBJ) $(C_OBJ)
 all: build
 
 build: boot_bin kernel_bin
-	dd if=$(BOOT_BIN) 					>> $(OS_BIN)
-	dd if=$(KERNEL_BIN) 				>> $(OS_BIN)
-	# bs = 16 Mo - size(BOOT_BIN) - size(KERNEL_BIN)
-	dd if=/dev/zero bs=16760302 count=1  >> $(OS_BIN)
+	dd if=/dev/zero of=$(OS_BIN) bs=1M count=32
+	dd if=$(BOOT_BIN) 					>> $(KERNEL_BUILD)
+	dd if=$(KERNEL_BIN) 				>> $(KERNEL_BUILD)
+	dd if=$(KERNEL_BUILD) of=$(OS_BIN) 	conv=notrunc
 
 # Compile and launch QEMU
 run:
