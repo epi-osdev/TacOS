@@ -33,7 +33,7 @@ entry_point:
     jmp $
 
 BOOT_DRIVE db 0
-KERNEL_OFFSET equ 0x7e00
+KERNEL_OFFSET equ 0x1000
 
 times 510 - ($-$$) db 0
 dw 0xaa55

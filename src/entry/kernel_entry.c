@@ -14,4 +14,5 @@ void init()
 void kernel_main()
 {
     init();
+    for (;;);
 }

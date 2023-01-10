@@ -41,3 +41,8 @@ void enable_entry(uint8_t index)
     idt[index].flags |= IDT_FLAG_PRESENT;
 }
 
+void idt32_init()
+{
+    idt_descriptor.idt = 0;
+    idt_descriptor.size = 0x3ff;
+}

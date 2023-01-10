@@ -31,11 +31,12 @@ INCLUDES		= -I $(SRC) -I $(UTILS)
 # Flags
 ASM_FLAGS		= -f elf32
 CFLAGS			= -g -ffreestanding $(INCLUDES) -W -Wall -Wextra
-LDFLAGS			= -Ttext 0x7e00 --oformat binary
+LDFLAGS			= -Ttext 0x1000 --oformat binary
 
 # Sources
 ASM_SRC			= $(ENTRY)/entry_point.asm \
-				$(DRIVERS)/idt/interrupts.asm
+				$(DRIVERS)/idt/interrupts.asm \
+				$(DRIVERS)/vesa/bios32.asm
 C_SRC			= $(ENTRY)/kernel_entry.c \
 				  $(UTILS)/VGA/clear.c \
 				  $(UTILS)/VGA/print.c \
@@ -52,7 +53,8 @@ C_SRC			= $(ENTRY)/kernel_entry.c \
 				  $(DRIVERS)/keyboard/init.c \
 				  $(DRIVERS)/keyboard/handler.c \
 				  $(DRIVERS)/vesa/init.c \
-				  $(DRIVERS)/gdt/gdt.c
+				  $(DRIVERS)/vesa/bios.c \
+				  $(DRIVERS)/gdt/gdt.c \
 
 # Objects
 C_OBJ			= $(C_SRC:.c=.o)

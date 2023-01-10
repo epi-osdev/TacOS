@@ -36,4 +36,6 @@ void disable_entry(uint8_t index);
 */
 void enable_entry(uint8_t index);
 
+void idt32_init();
+
 #endif

@@ -25,5 +25,6 @@ typedef struct gdt_descriptor_s {
 } __attribute__((packed)) gdt_descriptor_t;
 
 void gdt_set_entry(uint8_t index, base_t base, uint32_t limit, uint8_t access, uint8_t gran);
+void gdt32_init();
 
 #endif
