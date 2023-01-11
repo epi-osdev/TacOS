@@ -3,7 +3,7 @@
 
     #include "gdt/config.h"
 
-    #define IDT_SIZE 256
+    #define IDT_SIZE 48
     #define IDT_USED_SEGMENT KERNEL_CODE_SEGMENT
 
 #endif
