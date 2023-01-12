@@ -35,8 +35,7 @@ LDFLAGS			= -Ttext 0x1000 --oformat binary
 
 # Sources
 ASM_SRC			= $(ENTRY)/entry_point.asm \
-				$(DRIVERS)/idt/interrupts.asm \
-				$(DRIVERS)/vesa/bios32.asm
+				$(DRIVERS)/idt/interrupts.asm
 C_SRC			= $(ENTRY)/kernel_entry.c \
 				  $(UTILS)/VGA/clear.c \
 				  $(UTILS)/VGA/print.c \
@@ -53,8 +52,9 @@ C_SRC			= $(ENTRY)/kernel_entry.c \
 				  $(DRIVERS)/keyboard/init.c \
 				  $(DRIVERS)/keyboard/handler.c \
 				  $(DRIVERS)/vesa/init.c \
-				  $(DRIVERS)/vesa/bios.c \
 				  $(DRIVERS)/gdt/gdt.c \
+				  $(DRIVERS)/bios/32/interrupts.c \
+				  $(DRIVERS)/bios/32/init.c	
 
 # Objects
 C_OBJ			= $(C_SRC:.c=.o)

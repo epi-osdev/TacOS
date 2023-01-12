@@ -17,6 +17,11 @@ void gdt_set_entry(uint8_t index, base_t base, uint32_t limit, uint8_t access, u
 
 void gdt32_init()
 {
+    gdt_set_entry(0, (base_t) {0, 0, 0}, 0, 0, 0);
+    gdt_set_entry(1, (base_t) {0, 0, 0}, 0xffffffff, 0x9a, 0xcf);
+    gdt_set_entry(2, (base_t) {0, 0, 0}, 0xffffffff, 0x92, 0xcf);
+    gdt_set_entry(3, (base_t) {0, 0, 0}, 0xffffffff, 0xfa, 0xcf);
+    gdt_set_entry(4, (base_t) {0, 0, 0}, 0xffffffff, 0xf2, 0xcf);
     gdt_descriptor.limit = sizeof(gdt) - 1;
     gdt_descriptor.base_address = (uint32_t) &gdt;
 }
