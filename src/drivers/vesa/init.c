@@ -24,7 +24,6 @@ static int get_vbe_info()
 
 void init_vesa()
 {
-    gdt32_init();
-    idt32_init();
+    bios32_init();
     get_vbe_info();
 }
