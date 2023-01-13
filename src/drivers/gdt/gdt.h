@@ -26,5 +26,11 @@ typedef struct gdt_descriptor_s {
 
 void gdt_set_entry(uint8_t index, base_t base, uint32_t limit, uint8_t access, uint8_t gran);
 void gdt32_init();
+gdt_entry_t *get_gdt();
+void set_gdt_descriptor_base_addr(uint32_t base_addr);
+gdt_descriptor_t *get_gdt_descriptor();
+void gdt_init();
+
+extern void load_gdt(uint32_t gdt_descriptor_addr);
 
 #endif

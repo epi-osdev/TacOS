@@ -2,6 +2,7 @@
     #define __EOS_DRIVERS_IDT_IDT_H__
 
     #include "types.h"
+    #include "drivers/idt/datas.h"
 
 /**
  * @brief load the IDT with the descriptor.
@@ -35,5 +36,8 @@ void disable_entry(uint8_t index);
  * @param index The index of the IDT entry.
 */
 void enable_entry(uint8_t index);
+
+void idt32_init();
+idt_descriptor_t *get_idt_descriptor();
 
 #endif

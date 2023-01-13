@@ -1,40 +1,39 @@
-[org 0x7c00]
+; constants for multiboot header
+MBALIGN     equ  1<<0
+MEMINFO     equ  1<<1
+FLAGS       equ  MBALIGN | MEMINFO
+MAGIC       equ  0x1BADB002
+CHECKSUM    equ -(MAGIC + FLAGS)
 
-[bits 16]
-start:
-    mov ax, 0x00
-    mov ds, ax
-    mov es, ax
-    mov ss, ax
-    mov bp, 0x7c00
-    mov sp, bp
+; set multiboot section
+section .multiboot
+    align 4
+    dd MAGIC
+    dd FLAGS
+    dd CHECKSUM
 
-[bits 16]
-run_16:
-    mov [BOOT_DRIVE], dl
-    call load_kernel
-    call switch_to_pm
+section .data
+    align 4096
 
-%include "src/boot_sector/disk.asm"
-%include "src/boot_sector/switch_pm.asm"
-%include "src/boot_sector/gdt.asm"
+; initial stack
+section .initial_stack, nobits
+    align 4
 
-[bits 16]
-load_kernel:
-    mov ebx, KERNEL_OFFSET
-    mov dh, 31
-    mov dl, [BOOT_DRIVE]
-    call disk_load
-    ret
+stack_bottom:
+    ; 1 MB of uninitialized data for stack
+    resb 104856
+stack_top:
 
-[bits 32]
-entry_point:
-    call KERNEL_OFFSET
-    jmp $
+; kernel entry, main text section
+section .text
+    global _start
 
-BOOT_DRIVE db 0
-KERNEL_OFFSET equ 0x1000
 
-times 510 - ($-$$) db 0
-dw 0xaa55
-    
+; define _start, aligned by linker.ld script
+_start:
+    mov esp, stack_top
+    extern kernel_main
+    push ebx
+    call kernel_main
+loop:
+    jmp loop

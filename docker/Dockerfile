@@ -11,7 +11,8 @@ RUN apt-get install -y make \
     grub-common \
     qemu \
     xorriso \
-    grub-pc-bin
+    grub-pc-bin \
+    grub-common
 
 # Re-used environment variables
 ENV DIR="/osdev"

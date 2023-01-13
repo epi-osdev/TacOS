@@ -1,5 +1,5 @@
+#include "drivers/idt/idt.h"
 #include "drivers/idt/config.h"
-#include "drivers/idt/datas.h"
 #include "VGA.h"
 
 static idt_entry_t idt[IDT_SIZE] = {0};
@@ -10,7 +10,7 @@ static idt_descriptor_t idt_descriptor = {
 
 void lidt(void)
 {
-    asm("lidt (%0)" : : "m" (idt_descriptor));
+    asm("lidt (%0)" : : "r" (&idt_descriptor));
 }
 
 void create_idt_entry(uint8_t index, void *call, uint16_t segment, uint8_t flags)
@@ -39,4 +39,15 @@ void disable_entry(uint8_t index)
 void enable_entry(uint8_t index)
 {
     idt[index].flags |= IDT_FLAG_PRESENT;
+}
+
+void idt32_init()
+{
+    idt_descriptor.idt = 0;                                                     // Creating new idt
+    idt_descriptor.size = 0x3ff;
+}
+
+idt_descriptor_t *get_idt_descriptor()
+{
+    return &idt_descriptor;
 }
