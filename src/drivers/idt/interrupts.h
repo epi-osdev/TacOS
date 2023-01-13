@@ -1,5 +1,5 @@
-#ifndef __EOS_DRIVERS_IDT_INTERRUPTS_H__
-    #define __EOS_DRIVERS_IDT_INTERRUPTS_H__
+#ifndef __TOS_DRIVERS_IDT_INTERRUPTS_H__
+    #define __TOS_DRIVERS_IDT_INTERRUPTS_H__
 
 extern void isr0();
 extern void isr1();

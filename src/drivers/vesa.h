@@ -1,10 +1,7 @@
-#ifndef __TOS_DRIVERS_VESA_H__
-    #define __TOS_DRIVERS_VESA_H__
+#ifndef __GUI_H__
+    #define __GUI_H__
 
-/**
- * @brief VESA BIOS Extensions
-*/
-
-    #include "drivers/vesa/init.h"
+    #include "vesa/draw_square.h"
+    #include "vesa/init.h"
 
 #endif

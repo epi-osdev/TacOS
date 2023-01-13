@@ -1,5 +1,5 @@
-#ifndef __EOS_DRIVERS_KEYBOARD_INIT_H__
-    #define __EOS_DRIVERS_KEYBOARD_INIT_H__
+#ifndef __TOS_DRIVERS_KEYBOARD_INIT_H__
+    #define __TOS_DRIVERS_KEYBOARD_INIT_H__
 
 /**
  * @brief Initialize all the keyboard management.

@@ -1,5 +1,5 @@
-#ifndef __EOS_UTILS_VGA_VGA_H__
-    #define __EOS_UTILS_VGA_VGA_H__
+#ifndef __TOS_UTILS_VGA_VGA_H__
+    #define __TOS_UTILS_VGA_VGA_H__
 
     #include "types.h"
 

@@ -1,5 +1,5 @@
-#ifndef __EOS_UTILS_STRING_H__
-    #define __EOS_UTILS_STRING_H__
+#ifndef __TOS_UTILS_STRING_H__
+    #define __TOS_UTILS_STRING_H__
 
 /**
  * @brief      This is the global API for the string utils.

@@ -1,5 +1,5 @@
-#ifndef __EOS_DRIVERS_IDT_IDT_H__
-    #define __EOS_DRIVERS_IDT_IDT_H__
+#ifndef __TOS_DRIVERS_IDT_IDT_H__
+    #define __TOS_DRIVERS_IDT_IDT_H__
 
     #include "types.h"
     #include "drivers/idt/datas.h"

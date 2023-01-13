@@ -1,7 +1,6 @@
 #include "drivers/idt/handler.h"
 #include "drivers/idt/config.h"
 #include "drivers/pic.h"
-#include "VGA.h"
 
 static handler_t handlers[IDT_SIZE] = {0};
 

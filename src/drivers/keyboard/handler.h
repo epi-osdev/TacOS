@@ -1,5 +1,5 @@
-#ifndef __EOS_DRIVERS_KEYBOARD_HANDLER_H__
-    #define __EOS_DRIVERS_KEYBOARD_HANDLER_H__
+#ifndef __TOS_DRIVERS_KEYBOARD_HANDLER_H__
+    #define __TOS_DRIVERS_KEYBOARD_HANDLER_H__
 
     #include "drivers/idt.h"
 

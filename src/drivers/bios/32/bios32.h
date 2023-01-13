@@ -1,5 +1,7 @@
-#ifndef __TOS_DRIVERS_BIOS_32_BIOS32_H__
-    #define __TOS_DRIVERS_BIOS_32_BIOS32_H__
+#ifndef __BIOS32_H__
+    #define __BIOS32_H__
+
+    #include "types.h"
 
     #define REBASE_ADDRESS(x)  (void*)(0x7c00 + (void*)x - (uint32_t)BIOS32_START)
 

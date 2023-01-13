@@ -1,5 +1,5 @@
-#ifndef __EOS_UTILS_STRING_STRLEN_H__
-    #define __EOS_UTILS_STRING_STRLEN_H__
+#ifndef __TOS_UTILS_STRING_STRLEN_H__
+    #define __TOS_UTILS_STRING_STRLEN_H__
 
     #include "types.h"
 

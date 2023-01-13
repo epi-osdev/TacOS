@@ -1,6 +1,5 @@
 #include "drivers/idt/idt.h"
 #include "drivers/idt/config.h"
-#include "VGA.h"
 
 static idt_entry_t idt[IDT_SIZE] = {0};
 static idt_descriptor_t idt_descriptor = {
@@ -10,7 +9,7 @@ static idt_descriptor_t idt_descriptor = {
 
 void lidt(void)
 {
-    asm("lidt (%0)" : : "r" (&idt_descriptor));
+    __asm__ __volatile__("lidt (%0)" : : "r" (&idt_descriptor));
 }
 
 void create_idt_entry(uint8_t index, void *call, uint16_t segment, uint8_t flags)

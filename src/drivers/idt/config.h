@@ -1,9 +1,7 @@
-#ifndef __EOS_DRIVERS_IDT_CONFIG_H__
-    #define __EOS_DRIVERS_IDT_CONFIG_H__
-
-    #include "gdt/config.h"
+#ifndef __TOS_DRIVERS_IDT_CONFIG_H__
+    #define __TOS_DRIVERS_IDT_CONFIG_H__
 
     #define IDT_SIZE 48
-    #define IDT_USED_SEGMENT KERNEL_CODE_SEGMENT
+    #define IDT_USED_SEGMENT 0x08
 
 #endif

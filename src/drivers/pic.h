@@ -1,5 +1,5 @@
-#ifndef __EOS_DRIVERS_PIC_H__
-    #define __EOS_DRIVERS_PIC_H__
+#ifndef __TOS_DRIVERS_PIC_H__
+    #define __TOS_DRIVERS_PIC_H__
 
 /**
  * @brief This file provides all the functions to interact with the PIC.

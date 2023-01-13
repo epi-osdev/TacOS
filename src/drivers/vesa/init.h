@@ -1,6 +1,6 @@
-#ifndef __TOS_DRIVERS_VESA_INIT_H__
-    #define __TOS_DRIVERS_VESA_INIT_H__
+#ifndef __GUI_INIT_H__
+    #define __GUI_INIT_H__
 
-void init_vesa();
+void init_gui();
 
 #endif

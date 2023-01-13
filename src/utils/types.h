@@ -1,5 +1,5 @@
-#ifndef __EOS_UTILS_TYPES_H__
-    #define __EOS_UTILS_TYPES_H__
+#ifndef __TOS_UTILS_TYPES_H__
+    #define __TOS_UTILS_TYPES_H__
 
     #define NULL 0
 

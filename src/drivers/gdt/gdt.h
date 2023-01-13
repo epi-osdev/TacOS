@@ -1,9 +1,9 @@
-#ifndef __TOS_DRIVERS_GDT_GDT_H__
-    #define __TOS_DRIVERS_GDT_GDT_H__
+#ifndef __GDT_H__
+    #define __GDT_H__
 
     #include "types.h"
 
-    #define NO_GDT_DESCRIPTORS      8
+    #define NO_GDT_DESCRIPTORS     8
 
 typedef struct base_s {
     uint16_t low;
@@ -24,13 +24,11 @@ typedef struct gdt_descriptor_s {
     uint32_t base_address;               // base address of the first GDT segment
 } __attribute__((packed)) gdt_descriptor_t;
 
-void gdt_set_entry(uint8_t index, base_t base, uint32_t limit, uint8_t access, uint8_t gran);
-void gdt32_init();
-gdt_entry_t *get_gdt();
-void set_gdt_descriptor_base_addr(uint32_t base_addr);
-gdt_descriptor_t *get_gdt_descriptor();
-void gdt_init();
+extern void load_gdt(uint32_t gdt_ptr);
 
-extern void load_gdt(uint32_t gdt_descriptor_addr);
+void gdt_set_entry(int index, base_t base, uint32_t limit, uint8_t access, uint8_t gran);
+void gdt_init();
+gdt_descriptor_t *get_gdt_descriptor();
+gdt_entry_t *get_gdt();
 
 #endif

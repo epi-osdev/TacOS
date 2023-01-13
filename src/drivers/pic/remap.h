@@ -1,5 +1,5 @@
-#ifndef __EOS_DRIVERS_PIC_REMAP_H__
-    #define __EOS_DRIVERS_PIC_REMAP_H__
+#ifndef __TOS_DRIVERS_PIC_REMAP_H__
+    #define __TOS_DRIVERS_PIC_REMAP_H__
 
 /**
  * @brief Remap the PIC.

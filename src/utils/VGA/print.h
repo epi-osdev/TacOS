@@ -1,5 +1,5 @@
-#ifndef __EOS_VGA_PRINT_H__
-    #define __EOS_VGA_PRINT_H__
+#ifndef __TOS_VGA_PRINT_H__
+    #define __TOS_VGA_PRINT_H__
 
     #include "types.h"
 

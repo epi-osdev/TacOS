@@ -2,8 +2,8 @@
 #include "drivers/idt/idt.h"
 #include "drivers/idt/datas.h"
 #include "drivers/idt/interrupts.h"
-#include "drivers/pic.h"
 #include "drivers/idt/config.h"
+#include "drivers/pic.h"
 
 static void fill_idt_entries(void)
 {
@@ -267,7 +267,7 @@ static void fill_idt_entries(void)
 
 static void sti(void)
 {
-    asm("sti");
+    __asm__ __volatile__("sti");
 }
 
 void idt_init(void)
