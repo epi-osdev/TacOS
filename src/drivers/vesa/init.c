@@ -1,10 +1,12 @@
-#include "init.h"
 #include "types.h"
-#include "drivers/bios.h"
-#include "struct.h"
-#include "config.h"
-#include "drivers/vesa/datas.h"
 #include "memory.h"
+
+#include "drivers/bios.h"
+#include "drivers/vesa/init.h"
+#include "drivers/vesa/struct.h"
+#include "drivers/vesa/config.h"
+#include "drivers/vesa/datas.h"
+#include "drivers/vesa/draw_square.h"
 
 static VBE20_MODEINFOBLOCK vbe_mode_info = {0};
 static VBE20_INFOBLOCK g_vbe_infoblock = {0};
@@ -70,7 +72,19 @@ static int vesa_init(uint32_t width, uint32_t height, uint32_t bpp)
     return (0);
 }
 
+static GUI_t init_gui_structure()
+{
+    GUI_t gui;
+
+    gui.width = 0;
+    gui.height = 0;
+    gui.buffer = NULL;
+    gui.draw_square = _gui_draw_square;
+    return (gui);
+}
+
 void init_gui()
 {
+    GUI = init_gui_structure();
     vesa_init(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
 }

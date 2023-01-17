@@ -3,6 +3,6 @@
 
     #include "types.h"
 
-void draw_square(uint16_t x, uint16_t y, uint16_t size, uint32_t color);
+void _gui_draw_square(uint16_t x, uint16_t y, uint16_t size, uint32_t color);
 
 #endif

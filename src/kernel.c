@@ -10,5 +10,5 @@ void kmain()
     init_keyboard();
     init_gui();
 
-    draw_square(100, 100, 100, 0x00FF00);
+    GUI.draw_square(100, 100, 100, 0x00FF00);
 }
