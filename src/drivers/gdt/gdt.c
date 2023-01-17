@@ -6,15 +6,6 @@ static gdt_descriptor_t gdt_descriptor = {
     .base_address = (uint32_t) &gdt
 };
 
-/**
- * @brief Initialize GDT
- * 
- * @param index : index of GDT entry
- * @param base : base address of GDT entry
- * @param limit : limit of GDT entry
- * @param access : access flags of GDT entry
- * @param gran : granularity of GDT entry
- */
 void gdt_set_entry(int index, base_t base, uint32_t limit, uint8_t access, uint8_t gran)
 {
 
@@ -26,10 +17,6 @@ void gdt_set_entry(int index, base_t base, uint32_t limit, uint8_t access, uint8
     gdt[index].base_high = base.high;
 }
 
-/**
- * @brief Initialize GDT
- * 
- */
 void gdt_init()
 {
     gdt_descriptor.limit = sizeof(gdt) - 1;

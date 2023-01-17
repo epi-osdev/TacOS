@@ -7,10 +7,6 @@
 static gdt_descriptor_t gdt32 = {0};
 static idt_descriptor_t idt32 = {0};
 
-/**
- * @brief init bios32 routine by setting 6 & 7 the entries
- * this data will be copied when bios32_service() is called
- */
 void bios32_init()
 {
     gdt_set_entry(6, (base_t){0, 0, 0}, 0xffffffff, 0x9a, 0x0f);        // Adding two more entries to the GDT
@@ -21,13 +17,6 @@ void bios32_init()
     idt32.size = 0x3ff;
 }
 
-/**
- * @brief copy data to assembly bios32_call.asm and execute code from 0x7c00 address
- * 
- * @param interrupt : interrupt number
- * @param in : input registers
- * @param out : output registers
- */
 void bios32_service(uint8_t interrupt, regs16_t *in, regs16_t *out)
 {
     void *offset = (void *)0x7c00;
@@ -47,13 +36,6 @@ void bios32_service(uint8_t interrupt, regs16_t *in, regs16_t *out)
     idt_init();
 }
 
-/**
- * @brief bios interrupt call
- * 
- * @param interrupt : interrupt number
- * @param in : input registers
- * @param out : output registers
- */
 void int86(uint8_t interrupt, regs16_t *in, regs16_t *out)
 {
     bios32_service(interrupt, in, out);

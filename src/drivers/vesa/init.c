@@ -9,12 +9,6 @@
 static VBE20_MODEINFOBLOCK vbe_mode_info = {0};
 static VBE20_INFOBLOCK g_vbe_infoblock = {0};
 
-/**
- * @brief Get the vbe mode info object
- * 
- * @param mode : mode number
- * @param mode_info : pointer to mode info object
- */
 static void get_vbe_mode_info(uint16_t mode, VBE20_MODEINFOBLOCK *mode_info)
 {
     regs16_t in = {0}, out = {0};
@@ -27,14 +21,6 @@ static void get_vbe_mode_info(uint16_t mode, VBE20_MODEINFOBLOCK *mode_info)
     memcpy(mode_info, (void *)BIOS_CONVENTIONAL_MEMORY + 1024, sizeof(VBE20_MODEINFOBLOCK));
 }
 
-/**
- * @brief find the VBE mode by resolution X & Y
- * 
- * @param width : resolution X
- * @param height : resolution Y
- * @param bpp : bits per pixel
- * @return uint32_t : mode number
- */
 static int vbe_find_mode(uint32_t width, uint32_t height, uint32_t bpp)
 {
     // iterate through video modes list
@@ -50,11 +36,6 @@ static int vbe_find_mode(uint32_t width, uint32_t height, uint32_t bpp)
     return (-1);
 }
 
-/**
- * @brief : set vbe mode
- * 
- * @param mode : vbe mode
- */
 static void vbe_set_mode(uint32_t mode)
 {
     regs16_t in = {0}, out = {0};
@@ -74,14 +55,6 @@ static int get_vbe_info()
     return (out.ax == 0x4F);
 }
 
-/**
- * @brief Initialize VESA/VBE mode
- * 
- * @param width : width of the screen
- * @param height : height of the screen
- * @param bpp : bits per pixel
- * @return int : 0 if success, -1 if failed
- */
 static int vesa_init(uint32_t width, uint32_t height, uint32_t bpp)
 {
     bios32_init();
@@ -97,11 +70,6 @@ static int vesa_init(uint32_t width, uint32_t height, uint32_t bpp)
     return (0);
 }
 
-/**
- * @brief init_gui for Daniel's GUI
- * 
- * @param this : the gui
- */
 void init_gui()
 {
     vesa_init(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
