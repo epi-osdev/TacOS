@@ -5,6 +5,7 @@ QEMU 			= qemu-system-x86_64
 GRUB			= /usr/bin/grub-mkrescue
 
 SRC				= ./src
+ISO				= ./iso
 UTILS			= $(SRC)/utils
 DRIVERS			= $(SRC)/drivers
 BIOS			= $(DRIVERS)/bios
@@ -47,7 +48,7 @@ ASM_SRC			= $(BIOS)/32/interrupts.asm \
 				$(IDT)/interrupts.asm
 
 OBJ 			= $(C_SRC:.c=.o) $(ASM_SRC:.asm=.o)
-TARGET_BIN		= boot/TacOS.bin
+TARGET_BIN		= $(ISO)/TacOS.bin
 TARGET_ISO		= $(TARGET_BIN:.bin=.iso)
 
 all: build
