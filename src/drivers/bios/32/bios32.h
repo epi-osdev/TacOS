@@ -5,7 +5,7 @@
 
     #define REBASE_ADDRESS(x)  (void*)(0x7c00 + (void*)x - (uint32_t)BIOS32_START)
 
-// defined in bios32_call.asm
+// defined in interrupts.asm
 extern void BIOS32_START();
 extern void BIOS32_END();
 extern void *bios32_gdt_ptr;
