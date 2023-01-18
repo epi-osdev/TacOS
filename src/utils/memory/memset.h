@@ -3,6 +3,6 @@
 
     #include "types.h"
 
-void memset(void *ptr, int value, size_t size);
+void memset(void *dest, int c, size_t n);
 
 #endif

@@ -1,6 +1,6 @@
 #include "config.h"
 #include "print.h"
-#include "string.h"
+#include <string.h>
 #include <stdarg.h>
 
 static size_t get_index(uint8_t x, uint8_t y)

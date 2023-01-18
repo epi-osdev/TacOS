@@ -3,4 +3,22 @@ SRC			= itoa.c \
 			revstr.c \
 			strlen.c
 OBJ			= $(SRC:.c=.o)
-CFLAGS		= -W -Wall -Wextra -ffreestanding -std=c99
+INCLUDES	= -I ../
+CFLAGS		= -c -W -Wall -Wextra -Werror -fno-builtin $(INCLUDES)
+NAME		= libstring.a
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	ar rsc $(NAME) $(OBJ)
+
+clean:
+	$(RM) $(OBJ)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+%.o: %.c
+	$(CC) $(CFLAGS) -o $@ $<

@@ -14,9 +14,12 @@ IDT				= $(DRIVERS)/idt
 GUI				= $(DRIVERS)/vesa
 KEYBOARD		= $(DRIVERS)/keyboard
 PIC				= $(DRIVERS)/pic
+STRING_LIB		= $(UTILS)/string/libstring.a
+MEMORY_LIB		= $(UTILS)/memory/libmemory.a
 
+LIBS			= $(STRING_LIB) $(MEMORY_LIB)
 INCLUDES		= -I $(SRC) -I $(UTILS)
-C_FLAGS 		= -W -Wall -Wextra -ffreestanding $(INCLUDES)
+C_FLAGS 		= -W -Wall -Wextra -ffreestanding -Werror $(INCLUDES)
 LD_FLAGS 		= -T config/linker.ld -nostdlib -m elf_i386
 ASM_FLAGS 		= -f elf32
 QEMU_FLAGS		= -d int -no-reboot
@@ -24,11 +27,6 @@ QEMU_FLAGS		= -d int -no-reboot
 C_SRC			= src/kernel.c \
 				$(GDT)/gdt.c \
 				$(BIOS)/32/bios32.c \
-				$(UTILS)/string/itoa.c \
-				$(UTILS)/string/strlen.c \
-				$(UTILS)/string/revstr.c \
-				$(UTILS)/memory/memset.c \
-				$(UTILS)/memory/memcpy.c \
 				$(UTILS)/VGA/clear.c \
 				$(UTILS)/VGA/print.c \
 				$(IDT)/handler.c \
@@ -51,19 +49,27 @@ OBJ 			= $(C_SRC:.c=.o) $(ASM_SRC:.asm=.o)
 TARGET_BIN		= $(ISO)/TacOS.bin
 TARGET_ISO		= $(TARGET_BIN:.bin=.iso)
 
-all: build
+all: deps build
+
+deps:
+	make -C $(UTILS)/string
+	make -C $(UTILS)/memory
 
 build: $(OBJ)
-	$(LD) $(LD_FLAGS) -o $(TARGET_BIN) $(OBJ)
+	$(LD) $(LD_FLAGS) -o $(TARGET_BIN) $(OBJ) $(LIBS)
 	$(GRUB) -o $(TARGET_ISO) .
 
 run:
 	$(QEMU) $(QEMU_FLAGS) $(TARGET_ISO)
 
 clean:
+	make -C $(UTILS)/string clean
+	make -C $(UTILS)/memory clean
 	$(RM) $(OBJ)
 
 fclean: clean
+	make -C $(UTILS)/string fclean
+	make -C $(UTILS)/memory fclean
 	$(RM) $(TARGET_BIN)
 	$(RM) $(TARGET_ISO)
 

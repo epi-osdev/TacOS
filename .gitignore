@@ -6,3 +6,4 @@ iso/*
 *.bin
 .vscode
 **/*.iso
+**/*.a
