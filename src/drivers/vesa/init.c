@@ -80,6 +80,7 @@ static GUI_t init_gui_structure()
     gui.height = 0;
     gui.buffer = NULL;
     gui.draw_square = _gui_draw_square;
+    gui.draw_rect = _gui_draw_rect;
     return (gui);
 }
 
