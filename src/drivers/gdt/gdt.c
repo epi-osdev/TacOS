@@ -28,7 +28,7 @@ void gdt_init()
     gdt_set_entry(4, (base_t){0, 0, 0}, 0xffffffff, 0xf2, 0xcf);    // user data segment
     load_gdt((uint32_t)&gdt_descriptor);
 }
-
+²
 gdt_entry_t *get_gdt()
 {
     return gdt;
