@@ -16,7 +16,7 @@ KEYBOARD		= $(DRIVERS)/keyboard
 PIC				= $(DRIVERS)/pic
 
 INCLUDES		= -I $(SRC) -I $(UTILS)
-C_FLAGS 		= -W -Wall -Wextra -ffreestanding -std=c99 $(INCLUDES)
+C_FLAGS 		= -W -Wall -Wextra -ffreestanding $(INCLUDES)
 LD_FLAGS 		= -T config/linker.ld -nostdlib -m elf_i386
 ASM_FLAGS 		= -f elf32
 QEMU_FLAGS		= -d int -no-reboot
