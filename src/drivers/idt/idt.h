@@ -38,6 +38,10 @@ void disable_entry(uint8_t index);
 void enable_entry(uint8_t index);
 
 void idt32_init();
+
+/**
+ * @brief This function returns a pointer to the idt_descriptor 
+*/
 idt_descriptor_t *get_idt_descriptor();
 
 #endif
