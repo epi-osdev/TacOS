@@ -2,6 +2,7 @@
 #include "print.h"
 #include <string.h>
 #include <stdarg.h>
+#include "VGA/VGA_color_macros.h"
 
 static size_t get_index(uint8_t x, uint8_t y)
 {
@@ -69,4 +70,10 @@ int vga_printf_at(const char *format, uint8_t color, uint8_t x, uint8_t y, ...)
     }
     va_end(args);
     return size_printed;
+}
+
+void panic(const char *msg)
+{
+    vga_putstr_at(msg, VGA_RED, 0, 0);
+    for (;;);
 }

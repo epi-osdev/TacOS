@@ -5,6 +5,6 @@
  * @brief Initializes the GUI
  * Check the VESA mode and set the window size
 */
-void init_gui();
+int init_gui();
 
 #endif

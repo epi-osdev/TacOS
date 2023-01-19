@@ -84,8 +84,8 @@ static GUI_t init_gui_structure()
     return (gui);
 }
 
-void init_gui()
+int init_gui()
 {
     GUI = init_gui_structure();
-    vesa_init(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
+    return vesa_init(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
 }

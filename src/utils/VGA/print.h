@@ -48,4 +48,10 @@ int vga_print_int_at(int num, uint8_t color, uint8_t x, uint8_t y);
 */
 int vga_printf_at(const char *format, uint8_t color, uint8_t x, uint8_t y, ...);
 
+/**
+ * @brief Prints a string to the VGA buffer and stops the kernel
+ * @param str: the string to print
+*/
+void panic(const char *msg);
+
 #endif
