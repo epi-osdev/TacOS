@@ -38,12 +38,14 @@ C_SRC			= src/kernel.c \
 				$(KEYBOARD)/handler.c \
 				$(GUI)/draw_square.c \
 				$(GUI)/init.c \
-				$(GUI)/put_pixel.c
+				$(GUI)/put_pixel.c \
+				$(GUI)/print.c
 
 ASM_SRC			= $(BIOS)/32/interrupts.asm \
 				$(SRC)/boot_sector.asm \
 				$(GDT)/load_gdt.asm \
-				$(IDT)/interrupts.asm
+				$(IDT)/interrupts.asm \
+				$(GUI)/font/TacOS_font.asm
 
 OBJ 			= $(C_SRC:.c=.o) $(ASM_SRC:.asm=.o)
 TARGET_BIN		= $(ISO)/TacOS.bin

@@ -7,6 +7,7 @@
 #include "drivers/vesa/config.h"
 #include "drivers/vesa/datas.h"
 #include "drivers/vesa/draw_square.h"
+#include "drivers/vesa/print.h"
 
 static VBE20_MODEINFOBLOCK vbe_mode_info = {0};
 static VBE20_INFOBLOCK g_vbe_infoblock = {0};
@@ -84,8 +85,19 @@ static GUI_t init_gui_structure()
     return (gui);
 }
 
+static void init_default_font()
+{
+    static font_info_t default_font;
+    default_font.name = "default";
+    default_font.pointer = tacos_font_pointer;
+    default_font.width = 16;
+    default_font.height = 32;
+    change_font_info(&default_font);
+}
+
 int init_gui()
 {
+    init_default_font();
     GUI = init_gui_structure();
     return vesa_init(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
 }
