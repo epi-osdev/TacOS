@@ -1,10 +1,3 @@
-; this is a 16x32 font taken from ter-v32n psf font
-; it contains 512 characters
-
-global tacos_font_pointer
-
-tacos_font_pointer:
-
 db 00000000b,00000000b
 db 00000000b,00000000b
 db 00000000b,00000000b

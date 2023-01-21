@@ -8,7 +8,7 @@
  * @brief Change the current font to print with.
  * @param font_info The font to use.
 */
-void change_font_info(font_info_t *font_info);
+void _gui_change_font_info(font_info_t *font_info);
 
 /**
  * @brief Print a character on the screen.
@@ -17,6 +17,15 @@ void change_font_info(font_info_t *font_info);
  * @param y The y position of the character.
  * @param color The color of the character.
 */
-void print_char(char c, uint32_t x, uint32_t y, uint32_t color);
+void _gui_print_char(char c, uint32_t x, uint32_t y, uint32_t color);
+
+/**
+ * @brief Print a string on the screen.
+ * @param str The string to print.
+ * @param x The x position of the string.
+ * @param y The y position of the string.
+ * @param color The color of the string.
+*/
+void _gui_print_str(char *str, uint32_t x, uint32_t y, uint32_t color);
 
 #endif
