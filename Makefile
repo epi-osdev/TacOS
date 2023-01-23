@@ -48,6 +48,7 @@ C_SRC			= src/kernel.c \
 				$(VESA_CLI)/clear.c \
 				$(VESA_CLI)/prompt.c \
 				$(VESA_CLI)/buffer.c \
+				$(VESA_CLI)/commands.c \
 
 ASM_SRC			= $(BIOS)/32/interrupts.asm \
 				$(SRC)/boot_sector.asm \

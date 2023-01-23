@@ -7,5 +7,6 @@
 
     #include "memory/memset.h"
     #include "memory/memcpy.h"
+    #include "memory/malloc.h"
 
 #endif

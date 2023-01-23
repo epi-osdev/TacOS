@@ -5,4 +5,6 @@
 
 void move_buffer_up(uint8_t lines);
 
+uint8_t *get_line(uint8_t line);
+
 #endif

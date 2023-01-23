@@ -1,6 +1,7 @@
 CC				= i686-elf-gcc
 SRC				= memcpy.c \
-				memset.c
+				memset.c \
+				malloc.c
 OBJ				= $(SRC:.c=.o)
 CFLAGS			= -W -Wall -Wextra -fno-builtin -I ../
 NAME			= libmemory.a

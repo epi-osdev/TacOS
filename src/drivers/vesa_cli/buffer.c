@@ -1,6 +1,7 @@
 #include "drivers/vesa_cli/prompt.h"
 #include "drivers/vesa_cli/datas.h"
 #include "drivers/vesa_cli/clear.h"
+#include "memory.h"
 
 static void clear_last_lines(uint8_t lines)
 {
@@ -33,4 +34,13 @@ void move_buffer_up(uint8_t lines)
 {
     move_buffer(lines);
     clear_last_lines(1);
+}
+
+uint8_t *get_line(uint8_t line)
+{
+    uint8_t *buffer = malloc(vesa_cli.width);
+    for (size_t x = 0; x < vesa_cli.width; x++) {
+        buffer[x] = vesa_cli.buffer[x + line * vesa_cli.width].c;
+    }
+    return buffer;
 }
