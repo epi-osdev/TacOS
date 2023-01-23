@@ -1,7 +1,12 @@
 CC			= i686-elf-gcc
 SRC			= itoa.c \
 			revstr.c \
-			strlen.c
+			strlen.c \
+			split.c \
+			is_in.c \
+			strndup.c \
+			strcmp.c
+
 OBJ			= $(SRC:.c=.o)
 INCLUDES	= -I ../
 CFLAGS		= -c -W -Wall -Wextra -Werror -fno-builtin $(INCLUDES)

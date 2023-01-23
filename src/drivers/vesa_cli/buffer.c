@@ -2,6 +2,7 @@
 #include "drivers/vesa_cli/datas.h"
 #include "drivers/vesa_cli/clear.h"
 #include "memory.h"
+#include "string.h"
 
 static void clear_last_lines(uint8_t lines)
 {
@@ -43,4 +44,15 @@ uint8_t *get_line(uint8_t line)
         buffer[x] = vesa_cli.buffer[x + line * vesa_cli.width].c;
     }
     return buffer;
+}
+
+void add_str_to_buffer(const char *str)
+{
+    for (size_t i = 0; str[i]; i++) {
+        vesa_cli.buffer[vesa_cli.x + vesa_cli.y * vesa_cli.width] = (buffer_char_t) {
+            .c = str[i],
+            .can_be_modified = 1
+        };
+        check_new_line();
+    }
 }

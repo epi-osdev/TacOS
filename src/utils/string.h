@@ -10,5 +10,9 @@
     #include "string/itoa.h"
     #include "string/revstr.h"
     #include "string/strlen.h"
+    #include "string/is_in.h"
+    #include "string/strndup.h"
+    #include "string/split.h"
+    #include "string/strcmp.h"
 
 #endif

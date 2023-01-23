@@ -2,7 +2,7 @@
 #include "drivers/vesa_cli/datas.h"
 #include "drivers/vesa.h"
 
-void clear()
+void clear_cli()
 {
     for (uint32_t x = 0; x < vesa_cli.width; x++) {
         for (uint32_t y = 0; y < vesa_cli.height; y++) {

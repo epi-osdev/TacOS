@@ -31,6 +31,6 @@ void init_vesa_cli()
 {
     init_cli_datas();
     init_callbacks();
-    clear();
+    clear_cli();
     draw();
 }

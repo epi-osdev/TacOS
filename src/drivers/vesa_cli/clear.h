@@ -3,7 +3,7 @@
 
     #include "types.h"
 
-void clear();
+void clear_cli();
 
 void clear_char(pos2i_t pos);
 

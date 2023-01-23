@@ -4,6 +4,8 @@
 #include "drivers/vesa_cli/clear.h"
 #include "drivers/vesa_cli/prompt.h"
 #include "drivers/vesa_cli/buffer.h"
+#include "drivers/vesa_cli/commands.h"
+#include "string.h"
 
 static void delete_last_char()
 {
@@ -20,12 +22,17 @@ static void delete_last_char()
 
 static void new_line()
 {
+    int has_command = 1;
+    if (vesa_cli.x == strlen((char *)vesa_cli.prompt) + 1)
+        has_command = 0;
     vesa_cli.x = 0;
     vesa_cli.y++;
     if (vesa_cli.y >= vesa_cli.height) {
         vesa_cli.y--;
         move_buffer_up(1);
     }
+    if (has_command)
+        launch_command();
     print_prompt();
 }
 
