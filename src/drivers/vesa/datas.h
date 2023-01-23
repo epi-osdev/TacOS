@@ -21,6 +21,7 @@ typedef struct GUI_s {
     void (*print_c)(char c, uint32_t x, uint32_t y, uint32_t color);
     void (*print_s)(char *s, uint32_t x, uint32_t y, uint32_t color);
     void (*change_font)(font_info_t *font_info);
+    pos2i_t (*convert_pos2i)(pos2i_t pos);
 } GUI_t;
 
 GUI_t GUI;

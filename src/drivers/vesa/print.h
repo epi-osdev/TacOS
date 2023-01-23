@@ -28,4 +28,11 @@ void _gui_print_char(char c, uint32_t x, uint32_t y, uint32_t color);
 */
 void _gui_print_str(char *str, uint32_t x, uint32_t y, uint32_t color);
 
+/**
+ * @brief Convert a position in characters to a position in pixels.
+ * @param pos The position in characters.
+ * @return The position in pixels.
+*/
+pos2i_t _gui_convert_pos2i(pos2i_t pos);
+
 #endif

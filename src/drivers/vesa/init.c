@@ -87,6 +87,7 @@ static GUI_t init_gui_structure()
     gui.print_c = _gui_print_char;
     gui.print_s = _gui_print_str;
     gui.change_font = _gui_change_font_info;
+    gui.convert_pos2i = _gui_convert_pos2i;
     return (gui);
 }
 

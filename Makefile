@@ -12,6 +12,7 @@ BIOS			= $(DRIVERS)/bios
 GDT				= $(DRIVERS)/gdt
 IDT				= $(DRIVERS)/idt
 GUI				= $(DRIVERS)/vesa
+VESA_CLI		= $(DRIVERS)/vesa_cli
 KEYBOARD		= $(DRIVERS)/keyboard
 PIC				= $(DRIVERS)/pic
 STRING_LIB		= $(UTILS)/string/libstring.a
@@ -36,10 +37,15 @@ C_SRC			= src/kernel.c \
 				$(PIC)/remap.c \
 				$(KEYBOARD)/init.c \
 				$(KEYBOARD)/handler.c \
+				$(KEYBOARD)/scancode.c \
 				$(GUI)/draw_square.c \
 				$(GUI)/init.c \
 				$(GUI)/put_pixel.c \
-				$(GUI)/print.c
+				$(GUI)/print.c \
+				$(VESA_CLI)/init.c \
+				$(VESA_CLI)/update.c \
+				$(VESA_CLI)/draw.c \
+				$(VESA_CLI)/clear.c \
 
 ASM_SRC			= $(BIOS)/32/interrupts.asm \
 				$(SRC)/boot_sector.asm \

@@ -9,5 +9,6 @@
 */
 
     #include "keyboard/init.h"
+    #include "keyboard/handler.h"
 
 #endif
