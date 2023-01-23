@@ -12,3 +12,9 @@ void clear()
         }
     }
 }
+
+void clear_char(pos2i_t pos)
+{
+    pos = GUI.convert_pos2i(pos);
+    GUI.print_c(24, pos.x, pos.y, 0x000000);            // 24 is the full block character
+}
