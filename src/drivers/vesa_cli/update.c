@@ -2,6 +2,7 @@
 #include "drivers/vesa_cli/datas.h"
 #include "drivers/vesa_cli/draw.h"
 #include "drivers/vesa_cli/clear.h"
+#include "drivers/vesa_cli/prompt.h"
 
 static void delete_last_char()
 {
@@ -16,13 +17,28 @@ static void delete_last_char()
     clear_char((pos2i_t){vesa_cli.x, vesa_cli.y});
 }
 
+static void new_line()
+{
+    vesa_cli.x = 0;
+    vesa_cli.y++;
+    if (vesa_cli.y >= vesa_cli.height) {
+        vesa_cli.y = 0;
+    }
+    print_prompt();
+}
+
 static int check_special_case(uint8_t scancode)
 {
-    if (scancode == 0x0E) {     // 0x0E is backspace
-        delete_last_char();
-        return 1;
+    switch (scancode) {
+        case '\b':
+            delete_last_char();
+            return 1;
+        case '\n':
+            new_line();
+            return 1;
+        default:
+            return 0;
     }
-    return 0;
 }
 
 void vesa_cli_update(uint8_t scancode)
