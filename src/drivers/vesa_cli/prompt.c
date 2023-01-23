@@ -1,6 +1,19 @@
 #include "drivers/vesa_cli/prompt.h"
 #include "drivers/vesa_cli/datas.h"
+#include "drivers/vesa_cli/buffer.h"
 #include "types.h"
+
+void check_new_line()
+{
+    vesa_cli.x++;
+    if (vesa_cli.x >= vesa_cli.width) {
+        vesa_cli.x = 0;
+        vesa_cli.y++;
+    }
+    if (vesa_cli.y >= vesa_cli.height) {
+        move_buffer_up(1);
+    }
+}
 
 void init_prompt()
 {
@@ -28,13 +41,6 @@ void print_prompt()
 {
     for (size_t i = 0; vesa_cli.prompt[i].c; i++) {
         vesa_cli.buffer[vesa_cli.x + vesa_cli.y * vesa_cli.width] = vesa_cli.prompt[i];
-        vesa_cli.x++;
-        if (vesa_cli.x >= vesa_cli.width) {
-            vesa_cli.x = 0;
-            vesa_cli.y++;
-        }
-        if (vesa_cli.y >= vesa_cli.height) {
-            vesa_cli.y = 0;
-        }
+        check_new_line();
     }
 }

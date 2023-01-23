@@ -5,4 +5,6 @@ void print_prompt();
 
 void init_prompt();
 
+void check_new_line();
+
 #endif

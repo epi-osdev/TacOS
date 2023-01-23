@@ -3,6 +3,7 @@
 #include "drivers/vesa_cli/draw.h"
 #include "drivers/vesa_cli/clear.h"
 #include "drivers/vesa_cli/prompt.h"
+#include "drivers/vesa_cli/buffer.h"
 
 static void delete_last_char()
 {
@@ -22,7 +23,8 @@ static void new_line()
     vesa_cli.x = 0;
     vesa_cli.y++;
     if (vesa_cli.y >= vesa_cli.height) {
-        vesa_cli.y = 0;
+        vesa_cli.y--;
+        move_buffer_up(1);
     }
     print_prompt();
 }
@@ -48,14 +50,7 @@ void vesa_cli_update(uint8_t scancode)
     if (check_special_case(scancode))
         goto update_end;
     vesa_cli.buffer[vesa_cli.x + vesa_cli.y * vesa_cli.width].c = scancode;
-    vesa_cli.x++;
-    if (vesa_cli.x >= vesa_cli.width) {
-        vesa_cli.x = 0;
-        vesa_cli.y++;
-    }
-    if (vesa_cli.y >= vesa_cli.height) {
-        vesa_cli.y = 0;
-    }
+    check_new_line();
 update_end:
     draw();
 }
