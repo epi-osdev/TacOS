@@ -1,8 +1,10 @@
 #include "drivers/vesa_cli/init.h"
 #include "drivers/vesa_cli/datas.h"
 #include "drivers/vesa_cli/update.h"
-#include "drivers/keyboard.h"
 #include "drivers/vesa_cli/clear.h"
+#include "drivers/vesa_cli/draw.h"
+#include "drivers/vesa_cli/prompt.h"
+#include "drivers/keyboard.h"
 
 static void init_cli_datas()
 {
@@ -12,8 +14,12 @@ static void init_cli_datas()
     vesa_cli.width = 50;
     vesa_cli.height = 19;
     for (size_t i = 0; i < MAX_WIDTH_CHARS * MAX_HEIGHT_CHARS; i++) {
-        vesa_cli.buffer[i] = ' ';
+        vesa_cli.buffer[i] = (buffer_char_t) {
+            .c = 0,
+            .can_be_modified = 1
+        };
     }
+    init_prompt();
 }
 
 static void init_callbacks()
@@ -26,4 +32,5 @@ void init_vesa_cli()
     init_cli_datas();
     init_callbacks();
     clear();
+    draw();
 }

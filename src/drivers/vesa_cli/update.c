@@ -7,7 +7,11 @@ static void delete_last_char()
 {
     if (vesa_cli.x > 0) {
         vesa_cli.x--;
-        vesa_cli.buffer[vesa_cli.x + vesa_cli.y * vesa_cli.width] = 0;
+        if (vesa_cli.buffer[vesa_cli.x + vesa_cli.y * vesa_cli.width].can_be_modified) {
+            vesa_cli.buffer[vesa_cli.x + vesa_cli.y * vesa_cli.width].c = 0;
+        } else {
+            vesa_cli.x++;
+        }
     }
     clear_char((pos2i_t){vesa_cli.x, vesa_cli.y});
 }
@@ -27,7 +31,7 @@ void vesa_cli_update(uint8_t scancode)
         return;
     if (check_special_case(scancode))
         goto update_end;
-    vesa_cli.buffer[vesa_cli.x + vesa_cli.y * vesa_cli.width] = scancode;
+    vesa_cli.buffer[vesa_cli.x + vesa_cli.y * vesa_cli.width].c = scancode;
     vesa_cli.x++;
     if (vesa_cli.x >= vesa_cli.width) {
         vesa_cli.x = 0;
