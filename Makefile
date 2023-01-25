@@ -15,10 +15,11 @@ GUI				= $(DRIVERS)/vesa
 VESA_CLI		= $(DRIVERS)/vesa_cli
 KEYBOARD		= $(DRIVERS)/keyboard
 PIC				= $(DRIVERS)/pic
+HEAP			= $(DRIVERS)/heap
 STRING_LIB		= $(UTILS)/string/libstring.a
 MEMORY_LIB		= $(UTILS)/memory/libmemory.a
 
-LIBS			= $(STRING_LIB) $(MEMORY_LIB)
+LIBS			= $(STRING_LIB)
 INCLUDES		= -I $(SRC) -I $(UTILS)
 C_FLAGS 		= -W -Wall -Wextra -ffreestanding -Werror $(INCLUDES)
 LD_FLAGS 		= -T config/linker.ld -nostdlib -m elf_i386
@@ -52,6 +53,11 @@ C_SRC			= src/kernel.c \
 				$(VESA_CLI)/commands/launch.c \
 				$(VESA_CLI)/commands/echo.c \
 				$(VESA_CLI)/commands/clear.c \
+				$(UTILS)/memory/memcpy.c \
+				$(UTILS)/memory/memset.c \
+				$(UTILS)/memory/malloc.c \
+				$(UTILS)/memory/malloc/sectors.c \
+				$(HEAP)/address.c \
 
 ASM_SRC			= $(BIOS)/32/interrupts.asm \
 				$(SRC)/boot_sector.asm \
@@ -67,7 +73,6 @@ all: deps build
 
 deps:
 	make -C $(UTILS)/string
-	make -C $(UTILS)/memory
 
 build: $(OBJ)
 	$(LD) $(LD_FLAGS) -o $(TARGET_BIN) $(OBJ) $(LIBS)
@@ -78,12 +83,10 @@ run:
 
 clean:
 	make -C $(UTILS)/string clean
-	make -C $(UTILS)/memory clean
 	$(RM) $(OBJ)
 
 fclean: clean
 	make -C $(UTILS)/string fclean
-	make -C $(UTILS)/memory fclean
 	$(RM) $(TARGET_BIN)
 	$(RM) $(TARGET_ISO)
 
