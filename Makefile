@@ -19,7 +19,7 @@ HEAP			= $(DRIVERS)/heap
 STRING_LIB		= $(UTILS)/string/libstring.a
 MEMORY_LIB		= $(UTILS)/memory/libmemory.a
 
-LIBS			= $(STRING_LIB)
+LIBS			=
 INCLUDES		= -I $(SRC) -I $(UTILS)
 C_FLAGS 		= -W -Wall -Wextra -ffreestanding -Werror $(INCLUDES)
 LD_FLAGS 		= -T config/linker.ld -nostdlib -m elf_i386
@@ -58,6 +58,14 @@ C_SRC			= src/kernel.c \
 				$(UTILS)/memory/malloc.c \
 				$(UTILS)/memory/malloc/sectors.c \
 				$(HEAP)/address.c \
+				$(UTILS)/string/itoa.c \
+				$(UTILS)/string/revstr.c \
+				$(UTILS)/string/strlen.c \
+				$(UTILS)/string/split.c \
+				$(UTILS)/string/is_in.c \
+				$(UTILS)/string/strndup.c \
+				$(UTILS)/string/strcmp.c
+
 
 ASM_SRC			= $(BIOS)/32/interrupts.asm \
 				$(SRC)/boot_sector.asm \
@@ -72,7 +80,7 @@ TARGET_ISO		= $(TARGET_BIN:.bin=.iso)
 all: deps build
 
 deps:
-	make -C $(UTILS)/string
+	# make -C $(UTILS)/string
 
 build: $(OBJ)
 	$(LD) $(LD_FLAGS) -o $(TARGET_BIN) $(OBJ) $(LIBS)

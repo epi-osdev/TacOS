@@ -2,6 +2,7 @@
 #include "string/strndup.h"
 #include "string/is_in.h"
 #include "string/strlen.h"
+#include "drivers/vesa.h"
 #include "memory.h"
 
 size_t count_nb_words(const char *str, const char *sep)
@@ -38,6 +39,10 @@ char **split(const char *str, const char *sep)
             buff_id = i;
         } else if (is_sep && !empty_buf) {
             arr[arr_id++] = strndup(str + buff_id, i - buff_id);
+            GUI.print_s((char *)str + buff_id, 0, 500, 0x00FF00);
+            GUI.print_i(i - buff_id, 400, 500, 0x00FF00);
+            GUI.print_i(arr_id, 500, 500, 0x00FF00);
+            GUI.print_s(strndup(str + buff_id, i - buff_id), 520, 500, 0x0000FF);
             empty_buf = 1;
         }
     }
