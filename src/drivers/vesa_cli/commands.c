@@ -12,10 +12,10 @@ void launch_command()
     line = &line[strlen((char *)vesa_cli.prompt)]; // Delete prompt
     GUI.print_s(line, 0, 200, 0xFF0000);
     char **args = split(line, " ");
-    for (size_t i = 0; args[i]; i++) {
-        char fmt[] = "Hello World";
-        GUI.print_s(fmt, 0, i * 40 + 100, 0x00FF00);
-    }
+    // for (size_t i = 0; args[i]; i++) {
+    //     char fmt[] = "Hello World";
+    //     GUI.print_s(fmt, 0, i * 40 + 100, 0x00FF00);
+    // }
     char *command_name = args[0];
     args = &args[1];
 

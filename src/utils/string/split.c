@@ -24,7 +24,9 @@ size_t count_nb_words(const char *str, const char *sep)
 char **split(const char *str, const char *sep)
 {
     const size_t nb_words = count_nb_words(str, sep);
-    char **arr = malloc(sizeof(char *) * (nb_words + 1));
+    const size_t nb_words_alloc_size = sizeof(char *) * (nb_words + 1);
+    char **arr = malloc(nb_words_alloc_size);
+    memset(arr, 0, nb_words_alloc_size);
     size_t buff_id = 0;
     int empty_buf = 1;
     size_t arr_id = 0;

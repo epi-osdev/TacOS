@@ -2,6 +2,8 @@
 #include "drivers/vesa/datas.h"
 #include "drivers/vesa/put_pixel.h"
 #include "drivers/vesa/draw_square.h"
+#include <stdarg.h>
+#include "string.h"
 
 static font_info_t *current_font_info = NULL;
 
@@ -38,4 +40,20 @@ void _gui_print_str(char *str, uint32_t x, uint32_t y, uint32_t color)
     for (size_t i = 0; str[i] != '\0'; ++i) {
         _gui_print_char(str[i], x + i * current_font_info->width, y, color);
     }
+}
+
+void _gui_print_int(int num, uint32_t x, uint32_t y, uint32_t color)
+{
+    char str[16] = {0};
+
+    itoa(num, str, 10);
+    _gui_print_str(str, x, y, color);
+}
+
+void _gui_print_ptr(void *ptr, uint32_t x, uint32_t y, uint32_t color)
+{
+    char str[32] = {0};
+
+    itoa_u((uint32_t)ptr, str, 16);
+    _gui_print_str(str, x, y, color);
 }

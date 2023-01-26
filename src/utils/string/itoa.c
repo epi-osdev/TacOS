@@ -26,3 +26,21 @@ void itoa(int num, char *str, uint8_t base)
     str[i] = '\0';
     revstr(str);
 }
+
+void itoa_u(uint32_t num, char *str, uint8_t base)
+{
+    int i = 0;
+
+    if (num == 0) {
+        str[i++] = '0';
+        str[i] = '\0';
+        return;
+    }
+    while (num != 0) {
+        int rem = num % base;
+        str[i++] = (rem > 9) ? (rem - 10) + 'a' : rem + '0';
+        num /= base;
+    }
+    str[i] = '\0';
+    revstr(str);
+}

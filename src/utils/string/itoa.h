@@ -11,4 +11,6 @@
 */
 void itoa(int num, char *str, uint8_t base);
 
+void itoa_u(uint32_t num, char *str, uint8_t base);
+
 #endif
