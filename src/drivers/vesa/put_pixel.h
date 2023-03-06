@@ -3,6 +3,6 @@
 
     #include "types.h"
 
-void putpixel(int x, int y, uint32_t color);
+void _gui_putpixel(int x, int y, uint32_t color);
 
 #endif
