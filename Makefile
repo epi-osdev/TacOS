@@ -3,6 +3,7 @@ NASM			= nasm
 LD				= i686-elf-ld
 QEMU 			= qemu-system-x86_64
 GRUB			= /usr/bin/grub-mkrescue
+BOCHS			= bochs
 
 SRC				= ./src
 ISO				= ./iso
@@ -25,6 +26,7 @@ C_FLAGS 		= -W -Wall -Wextra -ffreestanding -Werror $(INCLUDES)
 LD_FLAGS 		= -T config/linker.ld -nostdlib -m elf_i386
 ASM_FLAGS 		= -f elf32
 QEMU_FLAGS		= -d int -no-reboot
+BOCHS_FLAGS		= -f bochsrc -q
 
 C_SRC			= src/kernel.c \
 				$(GDT)/gdt.c \
@@ -77,10 +79,7 @@ OBJ 			= $(C_SRC:.c=.o) $(ASM_SRC:.asm=.o)
 TARGET_BIN		= $(ISO)/TacOS.bin
 TARGET_ISO		= $(TARGET_BIN:.bin=.iso)
 
-all: deps build
-
-deps:
-	# make -C $(UTILS)/string
+all: build
 
 build: $(OBJ)
 	$(LD) $(LD_FLAGS) -o $(TARGET_BIN) $(OBJ) $(LIBS)
@@ -88,6 +87,9 @@ build: $(OBJ)
 
 run:
 	$(QEMU) $(QEMU_FLAGS) $(TARGET_ISO)
+
+run_bochs:
+	$(BOCHS) $(BOCHS_FLAGS)
 
 clean:
 	make -C $(UTILS)/string clean

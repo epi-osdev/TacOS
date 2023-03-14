@@ -12,6 +12,7 @@ void kmain()
     gdt_init();
     idt_init();
     init_keyboard();
+    vga_putstr_at("TEST 1 2", 0x0F, 0, 4);
     if (init_gui() < 0) {
         panic("Failed to initialize GUI");
     }
