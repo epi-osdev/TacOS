@@ -26,27 +26,33 @@ static void get_vbe_mode_info(uint16_t mode, VBE20_MODEINFOBLOCK *mode_info)
     memcpy(mode_info, (void *)BIOS_CONVENTIONAL_MEMORY + 1024, sizeof(VBE20_MODEINFOBLOCK));
 }
 
+static void print_vbe_mode(uint32_t width, uint32_t height, uint32_t bpp) {
+    static int x = 1, y = 4, i = 0;
+
+    if (i >= 20) {
+        vga_printf_at("mode: i: %d, w: %d, h: %d, bpp: %d / w: %d, h: %d, bpp: %d / r: %d",
+            0x0F, x, y++, i++,
+            vbe_mode_info.XResolution, vbe_mode_info.YResolution, vbe_mode_info.BitsPerPixel,
+            width, height, bpp,
+            vbe_mode_info.XResolution == width && vbe_mode_info.YResolution == height && vbe_mode_info.BitsPerPixel == bpp
+        );
+    } else {
+        i++;
+    }
+}
+
 static int vbe_find_mode(uint32_t width, uint32_t height, uint32_t bpp)
 {
     // iterate through video modes list
     uint16_t *mode_list = (uint16_t *) g_vbe_infoblock.VideoModePtr;
     uint16_t mode = *mode_list++;
 
-    int x = 1, y = 4, i = 0;
     while (mode != 0xffff) {                    // 0xffff is the end of the list
         get_vbe_mode_info(mode, &vbe_mode_info);
-        if (i > 10) {
-            vga_printf_at("mode: i: %d, w: %d, h: %d, bpp: %d / w: %d, h: %d, bpp: %d / r: %d",
-                0x0F, x, y++, i++,
-                vbe_mode_info.XResolution, vbe_mode_info.YResolution, vbe_mode_info.BitsPerPixel,
-                width, height, bpp,
-                vbe_mode_info.XResolution == width && vbe_mode_info.YResolution == height && vbe_mode_info.BitsPerPixel == bpp
-            );
-        } else {
-            i++;
-        }
-        if (vbe_mode_info.XResolution == width && vbe_mode_info.YResolution == height && vbe_mode_info.BitsPerPixel == bpp)
+        print_vbe_mode(width, height, bpp);
+        if (vbe_mode_info.XResolution == width && vbe_mode_info.YResolution == height && vbe_mode_info.BitsPerPixel == bpp) {
             return (mode);
+        }
         mode = *mode_list++;
     }
     return (-1);

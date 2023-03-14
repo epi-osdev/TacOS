@@ -7,3 +7,4 @@ iso/*
 .vscode
 **/*.iso
 **/*.a
+bx_enh_dbg.ini
