@@ -11,7 +11,9 @@ void kmain()
     gdt_init();
     idt_init();
     init_keyboard();
-    if (init_gui() < 0) {
+    int ret_code = init_gui();
+    if (ret_code < 0) {
+        vga_print_int_at(ret_code, 0x0F, 0, 10);
         panic("Failed to initialize GUI");
     }
     GUI.draw_square(100, 100, 100, 0x00FF00);

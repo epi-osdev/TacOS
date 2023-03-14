@@ -9,6 +9,7 @@
 #include "drivers/vesa/draw_square.h"
 #include "drivers/vesa/print.h"
 #include "drivers/vesa/put_pixel.h"
+#include "VGA.h"
 
 static VBE20_MODEINFOBLOCK vbe_mode_info = {0};
 static VBE20_INFOBLOCK g_vbe_infoblock = {0};
@@ -31,8 +32,19 @@ static int vbe_find_mode(uint32_t width, uint32_t height, uint32_t bpp)
     uint16_t *mode_list = (uint16_t *) g_vbe_infoblock.VideoModePtr;
     uint16_t mode = *mode_list++;
 
+    int x = 1, y = 4, i = 0;
     while (mode != 0xffff) {                    // 0xffff is the end of the list
         get_vbe_mode_info(mode, &vbe_mode_info);
+        if (i > 10) {
+            vga_printf_at("mode: i: %d, w: %d, h: %d, bpp: %d / w: %d, h: %d, bpp: %d / r: %d",
+                0x0F, x, y++, i++,
+                vbe_mode_info.XResolution, vbe_mode_info.YResolution, vbe_mode_info.BitsPerPixel,
+                width, height, bpp,
+                vbe_mode_info.XResolution == width && vbe_mode_info.YResolution == height && vbe_mode_info.BitsPerPixel == bpp
+            );
+        } else {
+            i++;
+        }
         if (vbe_mode_info.XResolution == width && vbe_mode_info.YResolution == height && vbe_mode_info.BitsPerPixel == bpp)
             return (mode);
         mode = *mode_list++;
@@ -66,7 +78,7 @@ static int vesa_init(uint32_t width, uint32_t height, uint32_t bpp)
         return (-1);
     int g_selected_mode = vbe_find_mode(width, height, bpp);
     if (g_selected_mode == -1)
-        return (-1);
+        return (-2);
     GUI.width = vbe_mode_info.XResolution;
     GUI.height = vbe_mode_info.YResolution;
     GUI.buffer = (uint32_t *)vbe_mode_info.PhysBasePtr;
@@ -104,5 +116,5 @@ int init_gui()
 {
     GUI = init_gui_structure();
     init_default_font();
-    return vesa_init(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
+    return vesa_init(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_BPP);
 }
