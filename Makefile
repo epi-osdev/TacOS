@@ -52,12 +52,10 @@ C_SRC			= src/kernel.c \
 				$(VESA_CLI)/prompt.c \
 				$(VESA_CLI)/buffer.c \
 				$(VESA_CLI)/commands.c \
-				$(VESA_CLI)/commands/launch.c \
-				$(VESA_CLI)/commands/echo.c \
-				$(VESA_CLI)/commands/clear.c \
 				$(FS)/init.c \
 				$(FS)/file.c \
-				$(FS)/files.c
+				$(FS)/files.c \
+				$(FS)/folder.c
 
 ASM_SRC			= $(BIOS)/32/interrupts.asm \
 				$(SRC)/boot_sector.asm \

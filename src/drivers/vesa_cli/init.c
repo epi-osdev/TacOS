@@ -4,6 +4,7 @@
 #include "drivers/vesa_cli/clear.h"
 #include "drivers/vesa_cli/draw.h"
 #include "drivers/vesa_cli/prompt.h"
+#include "drivers/vesa_cli/commands.h"
 #include "drivers/keyboard.h"
 
 static void init_cli_datas()
@@ -29,6 +30,7 @@ static void init_callbacks()
 
 void init_vesa_cli()
 {
+    init_command_list();
     init_cli_datas();
     init_callbacks();
     clear_cli();

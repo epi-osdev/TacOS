@@ -22,6 +22,18 @@ typedef struct VESA_CLI_s {
     buffer_char_t prompt[MAX_PROMPT_SIZE];
 } VESA_CLI_t;
 
+struct command {
+    int (*match)(const char *command);
+    int (*launch)(const char **args);
+};
+
+struct command_list {
+    struct command *command;
+    struct command_list *next;
+};
+
 VESA_CLI_t vesa_cli;
+
+struct command_list *command_list;
 
 #endif
