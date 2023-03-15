@@ -87,7 +87,7 @@ static int vesa_init(uint32_t width, uint32_t height, uint32_t bpp)
         return (-2);
     GUI.width = vbe_mode_info.XResolution;
     GUI.height = vbe_mode_info.YResolution;
-    GUI.buffer = (uint32_t *)vbe_mode_info.PhysBasePtr;
+    GUI.buffer = (uint8_t *)vbe_mode_info.PhysBasePtr;
     vbe_set_mode(g_selected_mode);
     return (0);
 }
