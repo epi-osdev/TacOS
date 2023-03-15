@@ -5,7 +5,8 @@ SRC			= itoa.c \
 			split.c \
 			is_in.c \
 			strndup.c \
-			strcmp.c
+			strcmp.c \
+			strcat.c
 
 OBJ			= $(SRC:.c=.o)
 INCLUDES	= -I ../

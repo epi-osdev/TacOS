@@ -3,6 +3,7 @@
 #include "drivers/vesa.h"
 #include "drivers/keyboard.h"
 #include "drivers/vesa_cli.h"
+#include "drivers/fs.h"
 #include "VGA.h"
 
 #include "drivers/vesa/print.h"
@@ -21,5 +22,6 @@ void kmain()
     GUI.draw_rect((pos2i_t){50, 50}, (pos2i_t){400, 400}, 0x0000FF);
     char fmt[] = "Hello, World!";
     GUI.print_s(fmt, 0, 0, 0x00FF00);
+    init_fs();
     init_vesa_cli();
 }

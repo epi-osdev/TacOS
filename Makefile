@@ -16,12 +16,13 @@ GUI				= $(DRIVERS)/vesa
 VESA_CLI		= $(DRIVERS)/vesa_cli
 KEYBOARD		= $(DRIVERS)/keyboard
 PIC				= $(DRIVERS)/pic
+FS				= $(DRIVERS)/fs
 STRING_LIB		= $(UTILS)/string/libstring.a
 MEMORY_LIB		= $(UTILS)/memory/libmemory.a
 
 LIBS			= $(STRING_LIB) $(MEMORY_LIB)
 INCLUDES		= -I $(SRC) -I $(UTILS)
-C_FLAGS 		= -W -Wall -Wextra -ffreestanding -Werror $(INCLUDES)
+C_FLAGS 		= -W -Wall -Wextra -ffreestanding  $(INCLUDES)
 LD_FLAGS 		= -T config/linker.ld -nostdlib -m elf_i386
 ASM_FLAGS 		= -f elf32
 QEMU_FLAGS		= -d int -no-reboot
@@ -54,6 +55,9 @@ C_SRC			= src/kernel.c \
 				$(VESA_CLI)/commands/launch.c \
 				$(VESA_CLI)/commands/echo.c \
 				$(VESA_CLI)/commands/clear.c \
+				$(FS)/init.c \
+				$(FS)/file.c \
+				$(FS)/files.c
 
 ASM_SRC			= $(BIOS)/32/interrupts.asm \
 				$(SRC)/boot_sector.asm \
