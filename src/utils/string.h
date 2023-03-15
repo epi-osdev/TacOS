@@ -14,5 +14,6 @@
     #include "string/strndup.h"
     #include "string/split.h"
     #include "string/strcmp.h"
+    #include "string/strcat.h"
 
 #endif

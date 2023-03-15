@@ -13,7 +13,7 @@ typedef struct font_info_s {
 
 typedef struct GUI_s {
     uint16_t width, height;
-    uint32_t *buffer;
+    uint8_t *buffer;
     uint8_t *indexes;
     void (*put_pixel)(int x, int y, uint32_t color);
     void (*draw_square)(uint16_t x, uint16_t y, uint16_t size, uint32_t color);
