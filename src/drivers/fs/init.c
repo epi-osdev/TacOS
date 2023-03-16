@@ -3,6 +3,7 @@
 #include "memory.h"
 #include "files.h"
 #include "file.h"
+#include "arch.h"
 #include "folder.h"
 #include "string.h"
 
@@ -39,7 +40,6 @@ static struct files *_files_builder(struct file file, ...)
     struct files *files = malloc(sizeof(struct files));
     struct files *tmp = files;
     va_list args;
-    int i = 0;
 
     memset(files, 0, sizeof(struct files));
     files->file = _file(file);
@@ -54,10 +54,7 @@ static struct files *_files_builder(struct file file, ...)
             .next = NULL
         });
         tmp = tmp->next;
-        i++;
     }
-    if (i == 3)
-        for (;;);
     return files;
 }
 
@@ -69,24 +66,9 @@ static struct files get_default_file_arch()
             .flags = FOLDER_FLAG,
             .content = _folder_ctn((struct folder_content) {
                 .files = _files_builder(
-                    (struct file) {
-                        .name = strdup("bin"),
-                        .flags = FOLDER_FLAG,
-                        .content = NULL,
-                        .parent = NULL
-                    },
-                    (struct file) {
-                        .name = strdup("img"),
-                        .flags = FOLDER_FLAG,
-                        .content = NULL,
-                        .parent = NULL
-                    },
-                    (struct file) {
-                        .name = NULL,
-                        .flags = 0,
-                        .content = NULL,
-                        .parent = NULL
-                    }
+                    bin_folder(),
+                    img_folder(),
+                    null_folder()
                 )
             })
         }),

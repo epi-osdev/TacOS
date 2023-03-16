@@ -58,6 +58,7 @@ C_SRC			= src/kernel.c \
 				$(FS)/files.c \
 				$(FS)/folder.c \
 				$(FS)/path.c \
+				$(FS)/arch.c \
 				$(BIN)/init.c \
 				$(BIN)/ls/init.c \
 				$(BIN)/cd/init.c \
