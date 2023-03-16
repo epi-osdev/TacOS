@@ -7,9 +7,15 @@
 
 static int __launch(const char **args)
 {
-    for (struct files *files = get_files(); files != NULL; files = files->next) {
-        struct file *file = files->file;
-        add_str_to_buffer(file->name);
+    struct file *folder = get_current_folder();
+
+    if (!folder)
+        return 0;
+
+    struct folder_content *content = folder->content;
+
+    for (struct files *files = content->files; files; files = files->next) {
+        add_str_to_buffer(files->file->name);
         add_str_to_buffer(" ");
     }
     return 1;

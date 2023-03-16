@@ -3,5 +3,6 @@
 
     #include "fs/init.h"
     #include "fs/files.h"
+    #include "fs/path.h"
 
 #endif

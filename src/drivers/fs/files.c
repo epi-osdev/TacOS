@@ -31,3 +31,8 @@ struct files *get_files()
 {
     return FS.files;
 }
+
+struct file *get_current_folder()
+{
+    return FS.current_file;
+}

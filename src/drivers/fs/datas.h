@@ -22,7 +22,8 @@ union content_unit {
 struct file {
     char *name;
     uint8_t flags;
-    struct file_content *content;
+    union content_unit *content;
+    struct file *parent;
 };
 
 struct files {
@@ -32,6 +33,8 @@ struct files {
 
 struct file_system {
     struct files *files;
+    char *path;
+    struct file *current_file;
 };
 
 struct file_system FS;

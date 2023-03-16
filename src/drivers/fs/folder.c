@@ -1,5 +1,5 @@
-#include "drivers/fs/datas.h"
 #include "drivers/fs/file.h"
+#include "drivers/fs/folder.h"
 #include "memory.h"
 #include "string.h"
 
@@ -35,4 +35,22 @@ struct file *create_folder_wname(const char *name)
     set_folder_name(folder, name);
     set_folder_flag(folder, default_folder_flags());
     return folder;
+}
+
+int is_folder(struct file *file)
+{
+    return file->flags & FOLDER_FLAG;
+}
+
+struct file *get_file(struct files *files, const char *name)
+{
+    struct files *tmp = files;
+    int i = 0;
+
+    while (tmp) {
+        if (strcmp(tmp->file->name, name) == 0)
+            return tmp->file;
+        tmp = tmp->next;
+    }
+    return NULL;
 }

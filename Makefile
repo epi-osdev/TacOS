@@ -57,8 +57,11 @@ C_SRC			= src/kernel.c \
 				$(FS)/file.c \
 				$(FS)/files.c \
 				$(FS)/folder.c \
+				$(FS)/path.c \
 				$(BIN)/init.c \
 				$(BIN)/ls/init.c \
+				$(BIN)/cd/init.c \
+				$(BIN)/pwd/init.c \
 				$(DISK)/read.c \
 				$(DISK)/write.c \
 				$(STRING_LIB)/itoa.c \

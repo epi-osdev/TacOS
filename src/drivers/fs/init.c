@@ -72,17 +72,20 @@ static struct files get_default_file_arch()
                     (struct file) {
                         .name = strdup("bin"),
                         .flags = FOLDER_FLAG,
-                        .content = NULL
+                        .content = NULL,
+                        .parent = NULL
                     },
                     (struct file) {
                         .name = strdup("img"),
                         .flags = FOLDER_FLAG,
-                        .content = NULL
+                        .content = NULL,
+                        .parent = NULL
                     },
                     (struct file) {
                         .name = NULL,
                         .flags = 0,
-                        .content = NULL
+                        .content = NULL,
+                        .parent = NULL
                     }
                 )
             })
@@ -94,12 +97,28 @@ static struct files get_default_file_arch()
 static struct file_system create_fs_data()
 {
     return (struct file_system) {
-        .files = _files(get_default_file_arch())
+        .files = _files(get_default_file_arch()),
+        .path = strdup("/"),
+        .current_file = NULL
     };
+}
+
+static void setup_parents(struct file *file)
+{
+    struct folder_content *content = file->content;
+
+    if (!content)
+        return;
+    for (struct files *files = content->files; files; files = files->next) {
+        files->file->parent = file;
+        setup_parents(files->file);
+    }
 }
 
 int init_fs()
 {
     FS = create_fs_data();
+    FS.current_file = FS.files->file;   
+    setup_parents(FS.files->file);
     return 1;
 }
