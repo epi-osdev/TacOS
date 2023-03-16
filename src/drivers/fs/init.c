@@ -10,6 +10,7 @@ static struct files *create_default_files() {
 
     memset(files, 0, sizeof(struct files));
     tmp = add_file(tmp, create_file_wname("test"));
+    tmp = add_file(tmp, create_file_wname("test2"));
     return files;
 }
 

@@ -20,7 +20,7 @@ union content_unit {
 };
 
 struct file {
-    char name[MAX_FILE_NAME_SIZE];
+    char *name;
     uint8_t flags;
     struct file_content *content;
 };

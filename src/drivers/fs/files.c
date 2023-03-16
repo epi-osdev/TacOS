@@ -26,3 +26,8 @@ struct files *add_file(struct files *files, struct file *file)
     tmp->next->file = file;
     return tmp->next;
 }
+
+struct files *get_files()
+{
+    return FS.files;
+}

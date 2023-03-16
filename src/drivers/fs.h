@@ -2,5 +2,6 @@
     #define __TOS_DRIVERS_FS_H__
 
     #include "fs/init.h"
+    #include "fs/files.h"
 
 #endif

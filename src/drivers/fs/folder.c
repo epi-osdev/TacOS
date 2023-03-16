@@ -1,6 +1,7 @@
 #include "drivers/fs/datas.h"
 #include "drivers/fs/file.h"
 #include "memory.h"
+#include "string.h"
 
 struct file *create_empty_folder()
 {
@@ -15,7 +16,7 @@ static uint8_t default_folder_flags()
     return FOLDER_FLAG;
 }
 
-static set_folder_name(struct file *folder, const char *name)
+static void set_folder_name(struct file *folder, const char *name)
 {
     memset(folder->name, 0, MAX_FILE_NAME_SIZE);
     strcat(folder->name, name);

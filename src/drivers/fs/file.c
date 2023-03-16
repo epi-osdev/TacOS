@@ -1,6 +1,7 @@
 #include "drivers/fs/file.h"
 #include "string.h"
 #include "memory.h"
+#include "drivers/vesa.h"
 
 static uint8_t default_file_flags()
 {
@@ -17,8 +18,6 @@ static struct file_content *empty_file_content()
     struct file_content *content = malloc(sizeof(union content_unit));
 
     memset(content, 0, sizeof(union content_unit));
-    content->content = NULL;
-    content->next = NULL;
     return content;
 }
 
@@ -44,7 +43,9 @@ struct file *create_empty_file()
 
 void set_file_name(struct file *f, const char *name)
 {
-    memset(f->name, 0, MAX_FILE_NAME_SIZE);
+    if (!f->name)
+        f->name = malloc(sizeof(char) * (MAX_FILE_NAME_SIZE + 1));
+    memset(f->name, 0, sizeof(char) * (MAX_FILE_NAME_SIZE + 1));
     strcat(f->name, name);
 }
 
