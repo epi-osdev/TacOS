@@ -35,4 +35,8 @@ void _gui_print_str(char *str, uint32_t x, uint32_t y, uint32_t color);
 */
 pos2i_t _gui_convert_pos2i(pos2i_t pos);
 
+void _gui_print_hex(uint32_t hex, uint32_t x, uint32_t y, uint32_t color);
+
+void _gui_print_dec(uint32_t dec, uint32_t x, uint32_t y, uint32_t color);
+
 #endif

@@ -9,6 +9,7 @@ SRC				= ./src
 ISO				= ./iso
 UTILS			= $(SRC)/utils
 DRIVERS			= $(SRC)/drivers
+BIN				= $(SRC)/bin
 BIOS			= $(DRIVERS)/bios
 GDT				= $(DRIVERS)/gdt
 IDT				= $(DRIVERS)/idt
@@ -17,6 +18,7 @@ VESA_CLI		= $(DRIVERS)/vesa_cli
 KEYBOARD		= $(DRIVERS)/keyboard
 PIC				= $(DRIVERS)/pic
 FS				= $(DRIVERS)/fs
+DISK			= $(DRIVERS)/disk
 STRING_LIB		= $(UTILS)/string/libstring.a
 MEMORY_LIB		= $(UTILS)/memory/libmemory.a
 
@@ -55,7 +57,11 @@ C_SRC			= src/kernel.c \
 				$(FS)/init.c \
 				$(FS)/file.c \
 				$(FS)/files.c \
-				$(FS)/folder.c
+				$(FS)/folder.c \
+				$(BIN)/init.c \
+				$(BIN)/ls/init.c \
+				$(DISK)/read.c \
+				$(DISK)/write.c \
 
 ASM_SRC			= $(BIOS)/32/interrupts.asm \
 				$(SRC)/boot_sector.asm \
@@ -76,6 +82,7 @@ deps:
 build: $(OBJ)
 	$(LD) $(LD_FLAGS) -o $(TARGET_BIN) $(OBJ) $(LIBS)
 	$(GRUB) -o $(TARGET_ISO) .
+	cat test.txt >> $(TARGET_ISO)
 
 run:
 	$(QEMU) $(QEMU_FLAGS) $(TARGET_ISO)

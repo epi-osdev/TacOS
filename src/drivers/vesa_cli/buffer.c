@@ -56,3 +56,13 @@ void add_str_to_buffer(const char *str)
         check_new_line();
     }
 }
+
+void buffer_newline()
+{
+    vesa_cli.x = 0;
+    vesa_cli.y++;
+    if (vesa_cli.y >= vesa_cli.height) {
+        vesa_cli.y--;
+        move_buffer_up(1);
+    }
+}

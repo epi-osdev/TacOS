@@ -30,7 +30,6 @@ static void init_callbacks()
 
 void init_vesa_cli()
 {
-    init_command_list();
     init_cli_datas();
     init_callbacks();
     clear_cli();

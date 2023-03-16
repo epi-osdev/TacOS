@@ -9,4 +9,6 @@ uint8_t *get_line(uint8_t line);
 
 void add_str_to_buffer(const char *str);
 
+void buffer_newline();
+
 #endif

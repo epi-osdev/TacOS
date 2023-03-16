@@ -3,6 +3,8 @@
 #include "drivers/vesa_cli/prompt.h"
 #include "string.h"
 #include "memory.h"
+#include "drivers/vesa.h"
+#include "string.h"
 
 static void launch_unknown_command(const char *name)
 {
@@ -14,9 +16,9 @@ static void run_command(const char *name, const char **args)
 {
     struct command_list *list_node = command_list;
 
-    if (!list_node)
+    if (command_list == NULL)
         goto no_command_found;
-    for (; list_node; list_node = list_node->next) {
+    for (int i = 0; list_node; list_node = list_node->next, i++) {
         struct command *command = list_node->command;
         if (command->match(name)) {
             command->launch(args);
@@ -44,17 +46,12 @@ void launch_command()
     }
 }
 
-void init_command_list()
-{
-    command_list = NULL;
-}
-
 static struct command_list *create_empty_command_list()
 {
-    struct command_list *command_list = malloc(sizeof(struct command_list));
+    struct command_list *cmdlist = malloc(sizeof(struct command_list));
 
-    memset(command_list, 0, sizeof(struct command_list));
-    return command_list;
+    memset(cmdlist, 0, sizeof(struct command_list));
+    return cmdlist;
 }
 
 static struct command *create_empty_command()
@@ -67,15 +64,15 @@ static struct command *create_empty_command()
 
 void add_command(struct command command)
 {
-    struct command_list *tmp = command_list;
-
-    if (tmp == NULL) {
+    if (command_list == NULL) {
         command_list = create_empty_command_list();
         command_list->command = create_empty_command();
         (*command_list->command) = command;
         return;
     }
+    struct command_list *tmp = command_list;
     for (; tmp->next; tmp = tmp->next);
     tmp->next = create_empty_command_list();
-    (*tmp->command) = command;
+    tmp->next->command = create_empty_command();
+    (*tmp->next->command) = command;
 }

@@ -104,6 +104,8 @@ static GUI_t init_gui_structure()
     gui.draw_rect = _gui_draw_rect;
     gui.print_c = _gui_print_char;
     gui.print_s = _gui_print_str;
+    gui.print_hex = _gui_print_hex;
+    gui.print_d = _gui_print_dec;
     gui.change_font = _gui_change_font_info;
     gui.convert_pos2i = _gui_convert_pos2i;
     return (gui);
