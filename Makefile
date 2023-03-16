@@ -19,10 +19,9 @@ KEYBOARD		= $(DRIVERS)/keyboard
 PIC				= $(DRIVERS)/pic
 FS				= $(DRIVERS)/fs
 DISK			= $(DRIVERS)/disk
-STRING_LIB		= $(UTILS)/string/libstring.a
-MEMORY_LIB		= $(UTILS)/memory/libmemory.a
+STRING_LIB		= $(UTILS)/string
+MEMORY_LIB		= $(UTILS)/memory
 
-LIBS			= $(STRING_LIB) $(MEMORY_LIB)
 INCLUDES		= -I $(SRC) -I $(UTILS)
 C_FLAGS 		= -W -Wall -Wextra -ffreestanding  $(INCLUDES)
 LD_FLAGS 		= -T config/linker.ld -nostdlib -m elf_i386
@@ -62,6 +61,18 @@ C_SRC			= src/kernel.c \
 				$(BIN)/ls/init.c \
 				$(DISK)/read.c \
 				$(DISK)/write.c \
+				$(STRING_LIB)/itoa.c \
+				$(STRING_LIB)/revstr.c \
+				$(STRING_LIB)/strlen.c \
+				$(STRING_LIB)/split.c \
+				$(STRING_LIB)/is_in.c \
+				$(STRING_LIB)/strndup.c \
+				$(STRING_LIB)/strcmp.c \
+				$(STRING_LIB)/strcat.c \
+				$(STRING_LIB)/strdup.c \
+				$(MEMORY_LIB)/memcpy.c \
+				$(MEMORY_LIB)/memset.c \
+				$(MEMORY_LIB)/malloc.c
 
 ASM_SRC			= $(BIOS)/32/interrupts.asm \
 				$(SRC)/boot_sector.asm \
@@ -73,14 +84,10 @@ OBJ 			= $(C_SRC:.c=.o) $(ASM_SRC:.asm=.o)
 TARGET_BIN		= $(ISO)/TacOS.bin
 TARGET_ISO		= $(TARGET_BIN:.bin=.iso)
 
-all: deps build
-
-deps:
-	make -C $(UTILS)/string
-	make -C $(UTILS)/memory
+all: build
 
 build: $(OBJ)
-	$(LD) $(LD_FLAGS) -o $(TARGET_BIN) $(OBJ) $(LIBS)
+	$(LD) $(LD_FLAGS) -o $(TARGET_BIN) $(OBJ)
 	$(GRUB) -o $(TARGET_ISO) .
 	cat test.txt >> $(TARGET_ISO)
 
@@ -91,13 +98,9 @@ run_bochs:
 	$(BOCHS) $(BOCHS_FLAGS)
 
 clean:
-	make -C $(UTILS)/string clean
-	make -C $(UTILS)/memory clean
 	$(RM) $(OBJ)
 
 fclean: clean
-	make -C $(UTILS)/string fclean
-	make -C $(UTILS)/memory fclean
 	$(RM) $(TARGET_BIN)
 	$(RM) $(TARGET_ISO)
 

@@ -11,7 +11,7 @@ struct file *create_empty_folder()
     return folder;
 }
 
-static uint8_t default_folder_flags()
+uint8_t default_folder_flags()
 {
     return FOLDER_FLAG;
 }
