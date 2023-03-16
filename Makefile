@@ -74,6 +74,7 @@ C_SRC			= src/kernel.c \
 				$(STRING_LIB)/strcmp.c \
 				$(STRING_LIB)/strcat.c \
 				$(STRING_LIB)/strdup.c \
+				$(STRING_LIB)/join.c \
 				$(MEMORY_LIB)/memcpy.c \
 				$(MEMORY_LIB)/memset.c \
 				$(MEMORY_LIB)/malloc.c
