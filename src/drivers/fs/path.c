@@ -4,11 +4,9 @@
 #include "drivers/fs/datas.h"
 #include "drivers/fs/folder.h"
 
-#include "drivers/vesa.h"
-
 static int is_back(const char *path)
 {
-    return strcmp(path, ";;") == 0;
+    return strcmp(path, "..") == 0;
 }
 
 static char *simplify_path(const char *path)
