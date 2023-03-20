@@ -36,9 +36,9 @@ static uint8_t keyboard_shift_layouts[MAX_KEYBOARD_LAYOUTS][KEYBOARD_LAYOUT_SIZE
         0
     },
     {
-        0, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '°' /*167*/, '+', '\b',
+        0, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 167, '+', '\b',
         0, 'A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 168, 165, '\n',
-        0, 'Q', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', '%', 0, 0, 'µ',
+        0, 'Q', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', '%', 0, 0, 0,
         'W', 'X', 'C', 'V', 'B', 'N', '?', '.', '/', 167, 0, 0, 0, ' ', 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -50,7 +50,6 @@ static KEYBOARD_LAYOUT_t current_keyboard_layout = KEYBOARD_LAYOUT_FR;
 
 uint8_t get_keyboard_char(uint8_t scancode)
 {
-    // return scancode;
     if (scancode == SHIFT_SCANCODE) {
         layout_params[current_keyboard_layout].shift = !layout_params[current_keyboard_layout].shift;
         return 0;

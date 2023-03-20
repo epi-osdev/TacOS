@@ -59,8 +59,10 @@ C_SRC			= src/kernel.c \
 				$(FS)/folder.c \
 				$(FS)/path.c \
 				$(FS)/arch.c \
+				$(FS)/read.c \
 				$(BIN)/init.c \
 				$(BIN)/ls/init.c \
+				$(BIN)/cat/init.c \
 				$(BIN)/cd/init.c \
 				$(BIN)/pwd/init.c \
 				$(DISK)/read.c \
@@ -77,7 +79,10 @@ C_SRC			= src/kernel.c \
 				$(STRING_LIB)/join.c \
 				$(MEMORY_LIB)/memcpy.c \
 				$(MEMORY_LIB)/memset.c \
-				$(MEMORY_LIB)/malloc.c
+				$(MEMORY_LIB)/malloc.c \
+				$(MEMORY_LIB)/free.c \
+				$(MEMORY_LIB)/init.c \
+				$(MEMORY_LIB)/flags.c
 
 ASM_SRC			= $(BIOS)/32/interrupts.asm \
 				$(SRC)/boot_sector.asm \
@@ -94,7 +99,9 @@ all: build
 build: $(OBJ)
 	$(LD) $(LD_FLAGS) -o $(TARGET_BIN) $(OBJ)
 	$(GRUB) -o $(TARGET_ISO) .
-	cat test.txt >> $(TARGET_ISO)
+
+add_files:
+	python3 scripts/add_files.py $(TARGET_ISO)
 
 run:
 	$(QEMU) $(QEMU_FLAGS) $(TARGET_ISO)

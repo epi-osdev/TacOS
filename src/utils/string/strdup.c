@@ -6,7 +6,7 @@ char *strdup(const char *str)
     size_t len = strlen(str);
     char *new = malloc(len + 1);
 
+    memset(new, 0, len + 1);
     memcpy(new, str, len);
-    new[len] = '\0';
     return new;
 }

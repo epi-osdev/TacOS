@@ -2,7 +2,7 @@
 #include "drivers/fs.h"
 #include "string.h"
 
-static int __launch(const char **args)
+static int __launch(__attribute__((unused))const char **args)
 {
     add_str_to_buffer(FS.path);
     return 1;

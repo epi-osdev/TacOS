@@ -3,6 +3,6 @@
 
     #include "types.h"
 
-int read(uint8_t *buffer, uint32_t logical_block_address, uint32_t nb_sector);
+int read_disk(uint8_t *buffer, uint32_t logical_block_address, uint32_t nb_sector);
 
 #endif

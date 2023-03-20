@@ -5,14 +5,14 @@
 #include "VGA.h"
 #include "drivers/vesa.h"
 
-static int __launch(const char **args)
+static int __launch(__attribute__((unused))const char **args)
 {
     struct file *folder = get_current_folder();
 
     if (!folder)
         return 0;
 
-    struct folder_content *content = folder->content;
+    struct folder_content *content = (struct folder_content *)folder->content;
 
     for (struct files *files = content->files; files; files = files->next) {
         add_str_to_buffer(files->file->name);

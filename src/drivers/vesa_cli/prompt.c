@@ -11,6 +11,7 @@ void check_new_line()
         vesa_cli.y++;
     }
     if (vesa_cli.y >= vesa_cli.height) {
+        vesa_cli.y--;
         move_buffer_up(1);
     }
 }

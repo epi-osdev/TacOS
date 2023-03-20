@@ -30,7 +30,7 @@ static struct file_content *default_file_content()
 
 static void set_file_content(struct file *f, struct file_content *content)
 {
-    f->content = content;
+    f->content = (union content_unit *)content;
 }
 
 struct file *create_empty_file()

@@ -11,7 +11,7 @@ static int is_back(const char *path)
 
 static char *simplify_path(const char *path)
 {
-    const char **paths = split(path, "/");
+    const char **paths = (const char **)split(path, "/");
     char *new_path = malloc(sizeof(char) * (strlen(path) + 1));
 
     memset(new_path, 0, sizeof(char) * (strlen(path) + 1));
@@ -46,7 +46,7 @@ static char *get_new_path(const char *path)
 
 int change_dir(const char *path)
 {
-    const char **paths = split(path, '/');
+    const char **paths = (const char **)split(path, "/");
     struct file *current_file = FS.current_file;
 
     for (int i = 0; paths[i]; i++) {
@@ -56,7 +56,7 @@ int change_dir(const char *path)
             continue;
         }
 
-        struct folder_content *content = current_file->content;
+        struct folder_content *content = (struct folder_content *)current_file->content;
         struct file *file = get_file(content->files, paths[i]);
         if (!file)
             return 0;

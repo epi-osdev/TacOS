@@ -12,8 +12,8 @@ static void init_cli_datas()
     vesa_cli.x = 0;
     vesa_cli.y = 0;
     vesa_cli.color = 0xFFFFFFFF;
-    vesa_cli.width = 50;
-    vesa_cli.height = 18;
+    vesa_cli.width = MAX_WIDTH_CHARS;
+    vesa_cli.height = MAX_HEIGHT_CHARS;
     for (size_t i = 0; i < MAX_WIDTH_CHARS * MAX_HEIGHT_CHARS; i++) {
         vesa_cli.buffer[i] = (buffer_char_t) {
             .c = 0,

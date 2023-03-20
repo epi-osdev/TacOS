@@ -3,7 +3,7 @@
 
     #include "types.h"
 
-    #define MAX_WIDTH_CHARS 80
+    #define MAX_WIDTH_CHARS 75
     #define MAX_HEIGHT_CHARS 25
     #define MAX_PROMPT_SIZE 8
 

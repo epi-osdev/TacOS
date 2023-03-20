@@ -6,57 +6,7 @@
 #include "arch.h"
 #include "folder.h"
 #include "string.h"
-
-#include <stdarg.h>
-
-static struct files *_files(struct files files) {
-    struct files *tmp = malloc(sizeof(struct files));
-
-    memset(tmp, 0, sizeof(struct files));
-    *tmp = files;
-    return tmp;
-}
-
-static struct file *_file(struct file file)
-{
-    struct file *f = malloc(sizeof(struct file));
-
-    memset(f, 0, sizeof(struct file));
-    *f = file;
-    return f;
-}
-
-static struct folder_content *_folder_ctn(struct folder_content content)
-{
-    struct folder_content *c = malloc(sizeof(struct folder_content));
-
-    memset(c, 0, sizeof(struct folder_content));
-    *c = content;
-    return c;
-}
-
-static struct files *_files_builder(struct file file, ...)
-{
-    struct files *files = malloc(sizeof(struct files));
-    struct files *tmp = files;
-    va_list args;
-
-    memset(files, 0, sizeof(struct files));
-    files->file = _file(file);
-    va_start(args, file);
-    while (1) {
-        struct file f = va_arg(args, struct file);
-
-        if (f.name == NULL)
-            break;
-        tmp->next = _files((struct files) {
-            .file = _file(f),
-            .next = NULL
-        });
-        tmp = tmp->next;
-    }
-    return files;
-}
+#include "VGA.h"
 
 static struct files get_default_file_arch()
 {
@@ -64,13 +14,15 @@ static struct files get_default_file_arch()
         .file = _file((struct file) {
             .name = strdup("/"),
             .flags = FOLDER_FLAG,
-            .content = _folder_ctn((struct folder_content) {
+            .content = (union content_unit *)_folder_ctn((struct folder_content) {
                 .files = _files_builder(
                     bin_folder(),
                     img_folder(),
+                    test_folder(),
                     null_folder()
                 )
-            })
+            }),
+            .parent = NULL
         }),
         .next = NULL
     };
@@ -87,7 +39,7 @@ static struct file_system create_fs_data()
 
 static void setup_parents(struct file *file)
 {
-    struct folder_content *content = file->content;
+    struct folder_content *content = (struct folder_content *)file->content;
 
     if (!content)
         return;

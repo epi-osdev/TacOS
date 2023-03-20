@@ -10,7 +10,7 @@ static inline void insl(int port, void *addr, int cnt)
                  : "memory", "cc");
 }
 
-int read(uint8_t *buffer, uint32_t lba, uint32_t sector_count)
+int read_disk(uint8_t *buffer, uint32_t lba, uint32_t sector_count)
 {
     // Wait for the disk to become ready
     while ((port_byte_in(ATA_STATUS_REG) & 0xC0) != 0x40);
@@ -33,7 +33,7 @@ int read(uint8_t *buffer, uint32_t lba, uint32_t sector_count)
     while ((port_byte_in(ATA_STATUS_REG) & 0xC0) != 0x40);
 
     // Read the sector data
-    for (int i = 0; i < sector_count; i++) {
+    for (uint32_t i = 0; i < sector_count; i++) {
         // Wait for the disk to become ready
         while ((port_byte_in(ATA_STATUS_REG) & 0xC0) != 0x40);
 

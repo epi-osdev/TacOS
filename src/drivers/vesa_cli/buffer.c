@@ -49,11 +49,15 @@ uint8_t *get_line(uint8_t line)
 void add_str_to_buffer(const char *str)
 {
     for (size_t i = 0; str[i]; i++) {
-        vesa_cli.buffer[vesa_cli.x + vesa_cli.y * vesa_cli.width] = (buffer_char_t) {
-            .c = str[i],
-            .can_be_modified = 1
-        };
-        check_new_line();
+        if (str[i] == '\n') {
+            buffer_newline();
+        } else {
+            vesa_cli.buffer[vesa_cli.x + vesa_cli.y * vesa_cli.width] = (buffer_char_t) {
+                .c = str[i],
+                .can_be_modified = 1
+            };
+            check_new_line();
+        }
     }
 }
 
@@ -61,7 +65,7 @@ void buffer_newline()
 {
     vesa_cli.x = 0;
     vesa_cli.y++;
-    if (vesa_cli.y >= vesa_cli.height) {
+    if (vesa_cli.y >= vesa_cli.height - 1) {
         vesa_cli.y--;
         move_buffer_up(1);
     }

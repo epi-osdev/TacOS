@@ -1,5 +1,6 @@
 #include "drivers/fs/file.h"
 #include "drivers/fs/folder.h"
+#include "drivers/vesa.h"
 #include "memory.h"
 #include "string.h"
 
@@ -44,13 +45,9 @@ int is_folder(struct file *file)
 
 struct file *get_file(struct files *files, const char *name)
 {
-    struct files *tmp = files;
-    int i = 0;
-
-    while (tmp) {
-        if (strcmp(tmp->file->name, name) == 0)
+    for (struct files *tmp = files; tmp; tmp = tmp->next) {
+        if (!strcmp(tmp->file->name, name))
             return tmp->file;
-        tmp = tmp->next;
     }
     return NULL;
 }
