@@ -72,11 +72,11 @@ struct file *get_file_from_gpath(const char *path)
     for (size_t i = 0; paths[i]; i++) {
         int found = 0;
         for (struct files *tmp = root_folder_content->files; tmp; tmp = tmp->next) {
-            vga_printf_at("%s %s", VGA_BLUE, 0, y++, tmp->file->name, paths[i]);
+            // vga_printf_at("%s %s", VGA_BLUE, 0, y++, tmp->file->name, paths[i]);
             if (!strcmp(tmp->file->name, paths[i])) {
                 current_file = tmp->file;
                 found = 1;
-                vga_printf_at("found %s %s", VGA_GREEN, 0, y++, tmp->file->name, paths[i]);
+                // vga_printf_at("found %s %s", VGA_GREEN, 0, y++, tmp->file->name, paths[i]);
                 break;
             }
         }

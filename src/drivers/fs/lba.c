@@ -27,7 +27,7 @@ static void fill_lba_datas(struct lba_data *lba_datas, char *line)
         .size = atoi(data[2]),
         .next = NULL
     };
-    vga_printf_at("%s %d %d", VGA_YELLOW, 20, y++, lba_datas->name, lba_datas->lba, lba_datas->size);
+    // vga_printf_at("%s %d %d", VGA_YELLOW, 20, y++, lba_datas->name, lba_datas->lba, lba_datas->size);
 }
 
 static struct lba_data *get_lba_datas(const char *lba_file_storage)
@@ -35,7 +35,7 @@ static struct lba_data *get_lba_datas(const char *lba_file_storage)
     struct file *file = get_file_from_path(lba_file_storage);
     uint8_t *buffer = read_file(file);
     char **lines = split((char *)buffer, "\n");
-    vga_printf_at("%s %s %s", VGA_BROWN, 20, 20, lines[0], lines[1], lines[2]);
+    // vga_printf_at("%s %s %s", VGA_BROWN, 20, 20, lines[0], lines[1], lines[2]);
     struct lba_data *lba_datas = malloc(sizeof(struct lba_data));
     int count = 0;
 
@@ -45,12 +45,12 @@ static struct lba_data *get_lba_datas(const char *lba_file_storage)
         fill_lba_datas(tmp, lines[i]);
         tmp->next = malloc(sizeof(struct lba_data));
         memset(tmp->next, 0, sizeof(struct lba_data));
-        vga_printf_at("%s %d %d", VGA_PURPLE, 20, 5 + i, lines[i], tmp->lba, tmp->size);
+        // vga_printf_at("%s %d %d", VGA_PURPLE, 20, 5 + i, lines[i], tmp->lba, tmp->size);
         tmp = tmp->next;
         count++;
     }
     // free(lines);
-    vga_printf_at("%d", VGA_CYAN, 20, 20, count);
+    // vga_printf_at("%d", VGA_CYAN, 20, 20, count);
     tmp->next = NULL;
     return lba_datas;
 }
@@ -70,11 +70,11 @@ void update_lba()
 
         // panic(new_name);
         struct file *file = get_file_from_path(new_name);
-        vga_printf_at("-> %s %d %d", VGA_GREEN, 20, 10 + i, tmp->name, tmp->lba, tmp->size);
-        vga_printf_at("%s %s %s %d %d", VGA_BLUE, 30, i++, new_name, file->name, tmp->name, tmp->lba, tmp->size);
+        // vga_printf_at("-> %s %d %d", VGA_GREEN, 20, 10 + i, tmp->name, tmp->lba, tmp->size);
+        // vga_printf_at("%s %s %s %d %d", VGA_BLUE, 30, i++, new_name, file->name, tmp->name, tmp->lba, tmp->size);
 
         if (!file) {
-            vga_printf_at("%s %s", VGA_RED, 30, i++, new_name, tmp->name);
+            // vga_printf_at("%s %s", VGA_RED, 30, i++, new_name, tmp->name);
             panic("update_lba: File not found");
         }
         if (is_folder(file)) {
@@ -85,6 +85,6 @@ void update_lba()
 
         content->lba = tmp->lba;
         content->size = tmp->size;
-        vga_printf_at("%s %d %d", VGA_GREEN, 30, i++, new_name, content->lba, content->size);
+        // vga_printf_at("%s %d %d", VGA_GREEN, 30, i++, new_name, content->lba, content->size);
     }
 }
