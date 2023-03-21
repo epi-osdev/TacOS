@@ -6,12 +6,13 @@
 #include "drivers/vesa_cli/prompt.h"
 #include "drivers/vesa_cli/commands.h"
 #include "drivers/keyboard.h"
+#include "drivers/vesa.h"
 
 static void init_cli_datas()
 {
     vesa_cli.x = 0;
     vesa_cli.y = 0;
-    vesa_cli.color = 0xFFFFFFFF;
+    vesa_cli.color = (enum RGB16)WHITE;
     vesa_cli.width = MAX_WIDTH_CHARS;
     vesa_cli.height = MAX_HEIGHT_CHARS;
     for (size_t i = 0; i < MAX_WIDTH_CHARS * MAX_HEIGHT_CHARS; i++) {

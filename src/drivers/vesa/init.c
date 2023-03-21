@@ -29,13 +29,18 @@ static void get_vbe_mode_info(uint16_t mode, VBE20_MODEINFOBLOCK *mode_info)
 static void print_vbe_mode(uint32_t width, uint32_t height, uint32_t bpp) {
     static int x = 1, y = 4, i = 0;
 
-    if (i >= 20) {
-        vga_printf_at("mode: i: %d, w: %d, h: %d, bpp: %d / w: %d, h: %d, bpp: %d / r: %d",
-            0x0F, x, y++, i++,
-            vbe_mode_info.XResolution, vbe_mode_info.YResolution, vbe_mode_info.BitsPerPixel,
-            width, height, bpp,
-            vbe_mode_info.XResolution == width && vbe_mode_info.YResolution == height && vbe_mode_info.BitsPerPixel == bpp
+    if (i == 25) {
+        // vga_printf_at("mode: i: %d, w: %d, h: %d, bpp: %d / w: %d, h: %d, bpp: %d / r: %d",
+        //     0x0F, x, y++, i++,
+        //     vbe_mode_info.XResolution, vbe_mode_info.YResolution, vbe_mode_info.BitsPerPixel,
+        //     width, height, bpp,
+        //     vbe_mode_info.XResolution == width && vbe_mode_info.YResolution == height && vbe_mode_info.BitsPerPixel == bpp
+        // );
+        vga_printf_at("rm: %d",
+            0x0F, x, y++,
+            vbe_mode_info.BytesPerScanLine
         );
+        i++;
     } else {
         i++;
     }
@@ -87,7 +92,7 @@ static int vesa_init(uint32_t width, uint32_t height, uint32_t bpp)
         return (-2);
     GUI.width = vbe_mode_info.XResolution;
     GUI.height = vbe_mode_info.YResolution;
-    GUI.buffer = (uint8_t *)vbe_mode_info.PhysBasePtr;
+    GUI.buffer = (uint16_t *)vbe_mode_info.PhysBasePtr;
     vbe_set_mode(g_selected_mode);
     return (0);
 }

@@ -1,4 +1,5 @@
 #include "drivers/fs/datas.h"
+#include "drivers/fs/config.h"
 #include "string.h"
 #include "memory.h"
 #include <stdarg.h>
@@ -104,6 +105,40 @@ struct file test_folder()
                     .content = (union content_unit *)_file_ctn((struct file_content) {
                         .lba = 24532,
                         .size = 2,
+                        .next = NULL
+                    }),
+                    .parent = NULL
+                },
+                (struct file) {
+                    .name = strdup("test2"),
+                    .flags = FILE_FLAG,
+                    .content = (union content_unit *)_file_ctn((struct file_content) {
+                        .lba = 24532,
+                        .size = 2,
+                        .next = NULL
+                    }),
+                    .parent = NULL
+                },
+                null_folder()
+            )
+        }),
+        .parent = NULL
+    };
+}
+
+struct file fs_folder()
+{
+    return (struct file) {
+        .name = strdup("fs"),
+        .flags = FOLDER_FLAG,
+        .content = (union content_unit *)_folder_ctn((struct folder_content) {
+            .files = _files_builder(
+                (struct file) {
+                    .name = strdup("index"),
+                    .flags = FILE_FLAG,
+                    .content = (union content_unit *)_file_ctn((struct file_content) {
+                        .lba = FS_SECTOR_START,
+                        .size = 1,
                         .next = NULL
                     }),
                     .parent = NULL

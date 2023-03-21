@@ -16,5 +16,6 @@
     #include "string/strcmp.h"
     #include "string/strcat.h"
     #include "string/strdup.h"
+    #include "string/atoi.h"
 
 #endif

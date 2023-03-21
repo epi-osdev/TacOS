@@ -60,6 +60,8 @@ C_SRC			= src/kernel.c \
 				$(FS)/path.c \
 				$(FS)/arch.c \
 				$(FS)/read.c \
+				$(FS)/sector.c \
+				$(FS)/lba.c \
 				$(BIN)/init.c \
 				$(BIN)/ls/init.c \
 				$(BIN)/cat/init.c \
@@ -68,6 +70,7 @@ C_SRC			= src/kernel.c \
 				$(DISK)/read.c \
 				$(DISK)/write.c \
 				$(STRING_LIB)/itoa.c \
+				$(STRING_LIB)/atoi.c \
 				$(STRING_LIB)/revstr.c \
 				$(STRING_LIB)/strlen.c \
 				$(STRING_LIB)/split.c \

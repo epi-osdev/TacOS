@@ -1,4 +1,5 @@
 #include "drivers/fs/datas.h"
+#include "lba.h"
 #include "types.h"
 #include "memory.h"
 #include "files.h"
@@ -19,6 +20,7 @@ static struct files get_default_file_arch()
                     bin_folder(),
                     img_folder(),
                     test_folder(),
+                    fs_folder(),
                     null_folder()
                 )
             }),
@@ -52,7 +54,8 @@ static void setup_parents(struct file *file)
 int init_fs()
 {
     FS = create_fs_data();
-    FS.current_file = FS.files->file;   
+    FS.current_file = FS.files->file;
     setup_parents(FS.files->file);
+    update_lba();
     return 1;
 }

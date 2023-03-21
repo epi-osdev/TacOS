@@ -3,6 +3,28 @@
 
     #include "types.h"
 
+    #define RGB_16(r, g, b)    ((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3)
+
+enum RGB16 {
+    BLACK = RGB_16(0, 0, 0),
+    BLUE = RGB_16(0, 0, 255),
+    GREEN = RGB_16(0, 255, 0),
+    CYAN = RGB_16(0, 255, 255),
+    RED = RGB_16(255, 0, 0),
+    MAGENTA = RGB_16(255, 0, 255),
+    BROWN = RGB_16(255, 255, 0),
+    LIGHT_GREY = RGB_16(192, 192, 192),
+    DARK_GREY = RGB_16(128, 128, 128),
+    LIGHT_BLUE = RGB_16(128, 128, 255),
+    LIGHT_GREEN = RGB_16(128, 255, 128),
+    LIGHT_CYAN = RGB_16(128, 255, 255),
+    LIGHT_RED = RGB_16(255, 128, 128),
+    LIGHT_MAGENTA = RGB_16(255, 128, 255),
+    YELLOW = RGB_16(255, 255, 128),
+    WHITE = RGB_16(255, 255, 255)
+};
+
+
 typedef struct font_info_s {
     char *name;
     uint8_t *pointer;
@@ -13,7 +35,7 @@ typedef struct font_info_s {
 
 typedef struct GUI_s {
     uint16_t width, height;
-    uint8_t *buffer;
+    uint16_t *buffer;
     uint8_t *indexes;
     void (*put_pixel)(int x, int y, uint32_t color);
     void (*draw_square)(uint16_t x, uint16_t y, uint16_t size, uint32_t color);

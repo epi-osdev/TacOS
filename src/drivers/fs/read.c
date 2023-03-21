@@ -31,14 +31,22 @@ static uint8_t *read_file_content(struct file_content *content)
     return buffer;
 }
 
-uint8_t *read_file(const char *path)
+uint8_t *read_file(struct file *file)
 {
-    struct folder_content *content = (struct folder_content *)FS.current_file->content;
-    struct file *file = get_file(content->files, path);
-
     if (!file)
         return NULL;
     if (is_folder(file))
         return NULL;
     return read_file_content((struct file_content * )file->content);
+}
+
+uint8_t *read_file_from_lpath(const char *path)
+{
+    struct folder_content *content = (struct folder_content *)FS.current_file->content;
+    struct file *file = get_file(content->files, path);
+    struct file_content *fcontent = (struct file_content *)file->content;
+
+    GUI.print_d(fcontent->lba, 100, 100, GREEN);
+    GUI.print_d(fcontent->size, 100, 150, GREEN);
+    return read_file(file);
 }

@@ -16,7 +16,7 @@ static int __launch(const char **args)
         return 0;
     }
     for (size_t i = 0; args[i]; ++i) {
-        uint8_t *buf = read_file(args[i]);
+        uint8_t *buf = read_file_from_lpath(args[i]);
         if (!buf) {
             add_str_to_buffer("cat: ");
             add_str_to_buffer(args[i]);
